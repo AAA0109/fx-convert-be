@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Process>
+  <Execution ECA_XML_Schema_Version="15-Nov-2018">
+    <Execution_Date>2022/10/10 12:50:55</Execution_Date>
+    <Process_File>panegaIO_2022-10-10_125055801_903870.xml</Process_File>
+    <Client>panegaIO</Client>
+    <Client_Master_Acct>F2008281</Client_Master_Acct>
+  </Execution>
+  <Applications>
+    <Application External_ID="OrgTester123" Status="Already processed">
+      <Customer>Test Org</Customer>
+    </Application>
+  </Applications></Process>

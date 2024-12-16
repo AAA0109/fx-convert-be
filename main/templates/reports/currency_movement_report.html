@@ -1,0 +1,93 @@
+{% extends "admin/change_list.html" %}
+{% load i18n admin_urls static pangea_reports %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block extrahead %}
+  <!-- extrahead -->
+  <script type="text/javascript">
+    document.querySelector('#Email').addEventListener('change', function () {
+      document.querySelector('#UserName').value = this.value;
+    });
+  </script>
+  {{ search_form.media }}
+  <!-- /extrahead -->
+{% endblock %}
+
+
+{% block object-tools %}
+  <!-- object-tools -->
+{% endblock %}
+
+{% block breadcrumbs %}
+  <!-- breadcrumbs -->
+  <div class="breadcrumbs">
+    <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+    &rsaquo; {{ title }}
+  </div>
+  <!-- /breadcrumbs -->
+{% endblock %}
+
+
+{% block date_hierarchy %}
+  <!-- date_hierarchy/ -->
+{% endblock %}
+
+
+{% block search %}
+  <!-- search -->
+  <form enctype="multipart/form-1data" action="" method="get"
+        id="search_form" novalidate="">
+    <div>
+      <fieldset class="module aligned  module_0 initialized">
+        <label>Company: </label>
+        <select id="company_id" name="company_id">
+          <option></option>
+          {% for company in companies %}
+            <option value="{{ company.pk }}"
+                    {% if company_id ==  company.pk %}selected="selected"{% endif %}>
+              {{ company.name }}
+            </option>
+          {% endfor %}
+        </select>
+        &nbsp;
+        <input type="submit" value="Search" class="default" name="_save">
+      </fieldset>
+    </div>
+  </form>
+  <!-- /search -->
+{% endblock %}
+
+{% block result_list %}
+  <!-- result_list -->
+  <div class="results" style="margin-top: 15px">
+    {% if values %}
+      {% include 'reports/currency_movement_report_table.html' with header='Volatility (%)' decimals=3 l1='vol' l2='percentage' %}
+      {% include 'reports/currency_movement_report_table.html' with header='Price (%)' decimals=3 l1='price' l2='percentage' %}
+      {% include 'reports/currency_movement_report_table.html' with header='Price (Std)' decimals=3 l1='price' l2='std' %}
+
+    {% else %}
+      <ul class="messagelist">
+        <li class="info">No info</li>
+      </ul>
+    {% endif %}
+  </div>
+  <!-- /result_list -->
+
+  <!-- Form events -->
+  <script type="text/javascript">
+    document.querySelector('#company_id').addEventListener('change',
+      function () {
+        console.log('Company ID:', document.querySelector('#company_id').value);
+        let url = window.location.href.split('?')[0];
+        window.location.href = url + '?company_id=' + document.querySelector('#company_id').value;
+      });
+  </script>
+  <!-- /Form events -->
+
+{% endblock %}
+
+
+{% block pagination %}
+  <!-- pagination/ -->
+{% endblock %}

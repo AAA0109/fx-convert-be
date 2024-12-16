@@ -1,0 +1,55 @@
+{% extends "core/email/layout/base.html" %}
+{% block content %}
+<p class="pangea-title uppercase">{{ title }}</p>
+<p class="pangea-subtitle">Total fees</p>
+<p class="pangea-title uppercase">{{ total }}</p>
+<p class="pangea-label-light">Period: {{ min_date }} Due: {{due_date}}</p>
+{% if has_payment == false %}
+<div class="pangea-warning-disclaimer-box">
+    <p class="pangea-subtitle" style="margin: 0px
+    ;">Action required</p>
+    <p class="pangea-text center">You currently do not have a payment method linked to process this invoice. Please link a
+        payment method before <strong>{{ due_date }}</strong>
+    </p>
+    <div>
+        <a href="{{ link_payment_url }}" class="btn" target="_blank">Link Payment Method</a>
+    </div>
+</div>
+{% endif %}
+{% for year, months in monthly_fees.items %}
+    <h2>{{ year }}</h2>
+    {% for month, fee_types in months.items %}
+        <h3>{{ month }}</h3>
+                <table class="table full-width striped" style="border: 1px solid #E0E0E0; border-radius: 4px;">
+                    <thead style="border: 1px solid #E0E0E0;">
+                        <tr>
+                            <th class="table-header-label" style="text-align: left; padding: 16px;">Fee Type</th>
+                            <th class="table-header-label">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for fee_type, fees in fee_types.items %}
+                        {% for fee in fees %}
+                        <tr>
+                            <td>{{ fee.fee_type  }}</td>
+                            <td style="text-align: right">{{ fee.total }}</td>
+                        </tr>
+                        {%  endfor %}
+                     {% endfor %}
+                    </tbody>
+                </table>
+    {% endfor %}
+{% endfor %}
+<div class="pangea-table-cell-dark" style="margin-top: 15px">
+  <p class="table-header-label" style="padding: 16px;"> Total: {{total}}</p>
+</div>
+<p>You will be automatically charged on <b>{{ due_date }}</b> to the account ending ****{{ account_number }}. Please review and contact us if
+you have any questions.</p>
+<div>
+    <a href="{{ url }}" class="btn" target="_blank">Go to Account </a>
+</div>
+
+<p class="lightgrey">Thank you,<br />
+    Pangea
+</p>
+{% endblock %}

@@ -1,0 +1,205 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: ems-corpay-1
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: ems-corpay-1
+    template:
+        metadata:
+            labels:
+                app: ems-corpay-1
+        spec:
+            serviceAccountName: pangea-${APP_ENVIRONMENT}-srv-acc-api-ksa
+            containers:
+                -   name: ems-corpay-1
+                    image: "us-central1-docker.pkg.dev/${PROJECT_ID}/pangea-docker-repository/${APP_ENVIRONMENT}-pangea-dashboard-api:${APP_ENVIRONMENT}"
+                    imagePullPolicy: Always
+                    args: [ "python", "manage.py", "runems", "--ems-id", "CORPAY1", "--ems-type", "CORPAY", "--timeout", "0.05" ]
+                    resources:
+                        requests:
+                            cpu: "2"
+                            memory: "8Gi"
+                        limits:
+                            cpu: "2"
+                            memory: "8Gi"
+                    env:
+                        -   name: DB_REGION
+                            value: "${DB_REGION}"
+                        -   name: DB_INSTANCE
+                            value: "${DB_INSTANCE}"
+                        -   name: RUN_THE_WEB_SERVER
+                            value: "0"
+                        -   name: NEW_RELIC_CONFIG_FILE
+                            value: "newrelic.ini"
+                        -   name: ALLOWED_HOSTS
+                            value: "${ALLOWED_HOSTS}"
+                        -   name: APP_ENVIRONMENT
+                            value: "${APP_ENVIRONMENT}"
+                        -   name: DB_HOST
+                            value: "${DB_HOST}"
+                        -   name: DB_NAME
+                            value: "${DB_NAME}"
+                        -   name: DB_PORT
+                            value: "${DB_PORT}"
+                        -   name: DB_USER
+                            value: "${DB_USER}"
+                        -   name: REDIS_HOST
+                            value: "${REDIS_HOST}"
+                        -   name: REDIS_PORT
+                            value: "${REDIS_PORT}"
+                        -   name: DEBUG
+                            value: "${DEBUG}"
+                        -   name: DJANGO_SETTINGS_MODULE
+                            value: "${DJANGO_SETTINGS_MODULE}"
+                        -   name: GS_BUCKET_NAME
+                            value: "${GS_BUCKET_NAME}"
+                        -   name: GS_DEFAULT_ACL
+                            value: "${GS_DEFAULT_ACL}"
+                        -   name: GS_STORAGE_PATH
+                            value: "${GS_STORAGE_PATH}"
+                        -   name: IB_GATEWAY_URL
+                            value: "${IB_GATEWAY_URL}"
+                        -   name: IB_GATEWAY_PORT
+                            value: "${IB_GATEWAY_PORT}"
+                        -   name: IB_GATEWAY_CLIENT_ID
+                            value: "${IB_GATEWAY_CLIENT_ID}"
+                        -   name: GPG_HOME_DIR
+                            value: "${GPG_HOME_DIR}"
+                        -   name: GPG_RECIPIENT
+                            value: "${GPG_RECIPIENT}"
+                        -   name: GPG_SIGNER
+                            value: "${GPG_SIGNER}"
+                        -   name: GPG_KEYS_GET_FROM_GS_BUCKET
+                            value: "${GPG_KEYS_GET_FROM_GS_BUCKET}"
+                        -   name: GPG_KEYS_GS_BUCKET_FULL_PATH
+                            value: "${GPG_KEYS_GS_BUCKET_FULL_PATH}"
+                        -   name: FRONTEND_URL
+                            value: "${FRONTEND_URL}"
+                        -   name: HUBSPOT_TICKET_OWNER_ID
+                            value: "${HUBSPOT_TICKET_OWNER_ID}"
+                        -   name: SLACK_NOTIFICATIONS_CHANNEL
+                            value: "${SLACK_NOTIFICATIONS_CHANNEL}"
+                        -   name: TWILIO_ACCOUNT_SID
+                            value: "${TWILIO_ACCOUNT_SID}"
+                        -   name: TWILIO_VERIFIED_FROM_NUMBER
+                            value: "${TWILIO_VERIFIED_FROM_NUMBER}"
+                        -   name: AF_ENABLED
+                            value: "${AF_ENABLED}"
+                        -   name: AF_LOCATION
+                            value: "${AF_LOCATION}"
+                        -   name: AF_COMPOSER_ENV_NAME
+                            value: "${AF_COMPOSER_ENV_NAME}"
+                        -   name: AF_WEBSERVER_URL
+                            value: "${AF_WEBSERVER_URL}"
+                        -   name: DASHBOARD_API_URL
+                            value: "${DASHBOARD_API_URL}"
+                        -   name: DASHBOARD_API_USER
+                            value: "${DASHBOARD_API_USER}"
+                        -   name: DASHBOARD_API_TOKEN
+                            value: "${DASHBOARD_API_TOKEN}"
+                        -   name: VICTOR_OPS_API_ID
+                            value: "${VICTOR_OPS_API_ID}"
+                        -   name: VICTOR_OPS_API_KEY
+                            value: "${VICTOR_OPS_API_KEY}"
+                        -   name: VICTOR_OPS_ENABLED
+                            value: "${VICTOR_OPS_ENABLED}"
+                        -   name: OEMS_EMAIL_RECIPIENTS
+                            value: "${OEMS_EMAIL_RECIPIENTS}"
+                        -   name: SLACK_SIGNING_SECRET
+                            value: "${SLACK_SIGNING_SECRET}"
+                        -   name: OER_APP_ID
+                            value: "${OER_APP_ID}"
+                        -   name: GCP_PROJECT_ID
+                            value: "${GCP_PROJECT_ID}"
+                        -   name: TWS_CLIENTID_RESERVATION_API_URL
+                            value: "${TWS_CLIENTID_RESERVATION_API_URL}"
+                        -   name: CORPAY_PARTNER_LEVEL_USER_ID
+                            value: "${CORPAY_PARTNER_LEVEL_USER_ID}"
+                        -   name: CORPAY_JWT_AUDIENCE
+                            value: "${CORPAY_JWT_AUDIENCE}"
+                        -   name: CORPAY_API_URL
+                            value: "${CORPAY_API_URL}"
+                        -   name: CORPAY_CLIENT_LEVEL_CODE
+                            value: "${CORPAY_CLIENT_LEVEL_CODE}"
+                        -   name: VERTO_API_BASE
+                            value: "${VERTO_API_BASE}"
+                        -   name: VERTO_CLIENT_ID
+                            value: "${VERTO_CLIENT_ID}"
+                        -   name: VERTO_API_KEY
+                            value: "${VERTO_API_KEY}"
+                        -   name: NIUM_API_BASE
+                            value: "${NIUM_API_BASE}"
+                        -   name: NIUM_CLIENT_ID
+                            value: "${NIUM_CLIENT_ID}"
+                        -   name: MONEX_API_BASE
+                            value: "${MONEX_API_BASE}"
+                        -   name: MONEX_CLIENT_ID
+                            value: "${MONEX_CLIENT_ID}"
+                        -   name: DB_PASSWORD
+                            valueFrom:
+                                secretKeyRef:
+                                    name: external-secret-for-pangea-${APP_ENVIRONMENT}
+                                    key: DB_PASSWORD
+                        -   name: GPG_PASSPHRASE
+                            valueFrom:
+                                secretKeyRef:
+                                    name: external-secret-for-pangea-${APP_ENVIRONMENT}
+                                    key: GPG_PASSPHRASE
+                        -   name: STRIPE_API_KEY
+                            valueFrom:
+                                secretKeyRef:
+                                    name: external-secret-for-pangea-${APP_ENVIRONMENT}
+                                    key: STRIPE_API_KEY
+                        -   name: SENDGRID_API_KEY
+                            valueFrom:
+                                secretKeyRef:
+                                    name: external-secret-for-pangea-${APP_ENVIRONMENT}
+                                    key: SENDGRID_API_KEY
+                        -   name: HUBSPOT_ACCESS_TOKEN
+                            valueFrom:
+                                secretKeyRef:
+                                    name: external-secret-for-pangea-${APP_ENVIRONMENT}
+                                    key: HUBSPOT_ACCESS_TOKEN
+                        -   name: SLACK_NOTIFICATIONS_APP_BOT_TOKEN
+                            valueFrom:
+                                secretKeyRef:
+                                    name: external-secret-for-pangea-${APP_ENVIRONMENT}
+                                    key: SLACK_NOTIFICATIONS_APP_BOT_TOKEN
+                        -   name: TWILIO_AUTH_TOKEN
+                            valueFrom:
+                                secretKeyRef:
+                                    name: external-secret-for-pangea-${APP_ENVIRONMENT}
+                                    key: TWILIO_AUTH_TOKEN
+                        -   name: CORPAY_PARTNER_LEVEL_SIGNATURE
+                            valueFrom:
+                                secretKeyRef:
+                                    name: external-secret-for-pangea-${APP_ENVIRONMENT}
+                                    key: CORPAY_PARTNER_LEVEL_SIGNATURE
+                        -   name: CORPAY_CLIENT_LEVEL_SIGNATURE
+                            valueFrom:
+                                secretKeyRef:
+                                    name: external-secret-for-pangea-${APP_ENVIRONMENT}
+                                    key: CORPAY_CLIENT_LEVEL_SIGNATURE
+                        -   name: NIUM_API_KEY
+                            valueFrom:
+                                secretKeyRef:
+                                    name: external-secret-for-pangea-${APP_ENVIRONMENT}
+                                    key: NIUM_API_KEY
+                        -   name: MONEX_DEV_USERNAME
+                            valueFrom:
+                                secretKeyRef:
+                                    name: external-secret-for-pangea-${APP_ENVIRONMENT}
+                                    key: MONEX_DEV_USERNAME
+                        -   name: MONEX_DEV_PASSWORD
+                            valueFrom:
+                                secretKeyRef:
+                                    name: external-secret-for-pangea-${APP_ENVIRONMENT}
+                                    key: MONEX_DEV_PASSWORD
+                        -   name: MONEX_API_KEY
+                            valueFrom:
+                                secretKeyRef:
+                                    name: external-secret-for-pangea-${APP_ENVIRONMENT}
+                                    key: MONEX_API_KEY

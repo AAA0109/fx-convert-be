@@ -1,0 +1,28 @@
+{{ title }}
+Total fees: {{ total }}
+Period: {{ min_date }} Due: {{due_date}}
+{% if has_payment == false %}
+Action required
+You currently do not have a payment method linked to process this invoice. Please link a
+payment method before {{ due_date }}.
+Link Payment Method: {{ link_payment_url }}
+{% endif %}
+
+{% for year, months in monthly_fees.items %}
+    {{ year }}
+    {% for month, fee_types in months.items %}
+        {{ month }}
+        {% for fee_type, fees in fee_types.items %}
+            {% for fee in fees %}
+                {{ fee.fee_type  }} - {{ fee.total }}
+            {%  endfor %}
+         {% endfor %}
+    {% endfor %}
+{% endfor %}
+
+Total: {{total}}
+
+Go to Account {{ url }}
+
+Thank You,
+Pangea

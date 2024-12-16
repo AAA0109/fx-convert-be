@@ -1,0 +1,36 @@
+<p class="padded">Wire Transfer Instruction</p>
+<p class="padded small lightgrey">Call your bank or use an online portal to initiate a wire transfer. You will need your banking information and the following details:</p>
+<table class="full-width table">
+  <tr>
+    <td>Bank Name:</td>
+    <td>{{ bank_name }}</td>
+  </tr>
+  <tr>
+    <td>Bank Address:</td>
+    <td>{{ bank_address|linebreaksbr }}</td>
+  </tr>
+  <tr>
+    <td>Beneficiary Name:</td>
+    <td>{{ beneficiary_name }}</td>
+  </tr>
+  <tr>
+    <td>Beneficiary Address:</td>
+    <td>{{ beneficiary_address|linebreaksbr }}</td>
+  </tr>
+  <tr>
+    <td>Beneficiary Account Number:</td>
+    <td>{{ beneficiary_account_number }}</td>
+  </tr>
+  <tr>
+    <td>Beneficiary Routing Number:</td>
+    <td>{{ beneficiary_routing_number }}</td>
+  </tr>
+  <tr>
+    <td>SWIFT/BIC Code:</td>
+    <td>{{ swift_bic_code }}</td>
+  </tr>
+  <tr>
+    <td>Reference:</td>
+    <td>{{ wire_reference }}</td>
+  </tr>
+</table>

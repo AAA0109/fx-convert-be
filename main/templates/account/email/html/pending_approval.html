@@ -1,0 +1,47 @@
+{% extends "core/email/layout/base.html" %}
+{% block content %}
+  <table class="full-width">
+    <tr>
+      <td class="center">
+        <p><img src="{% static 'media/email/status/warning.png' %}"/></p>
+        <h3 class="uppercase">Hedge Pending: Approval Needed</h3>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p class="padded">A new cashflow has been created that requires your approval</p>
+      </td>
+    </tr>
+  </table>
+  <table class="full-width table striped">
+    <tr>
+      <td>Cashflow Name:</td>
+      <td>{{ name }}</td>
+    </tr>
+    <tr>
+      <td>Amount:</td>
+      <td>{{ amount }}</td>
+    </tr>
+    <tr>
+      <td>Currency:</td>
+      <td>{{ currency }}</td>
+    </tr>
+    <tr>
+      <td>Direction:</td>
+      <td>{{ direction }}</td>
+    </tr>
+    <tr>
+      <td>Payment Type:</td>
+      <td>{{ payment_type }}</td>
+    </tr>
+    <tr>
+      <td>Portfolio:</td>
+      <td>{{ portfolio }}</td>
+    </tr>
+  </table>
+  <h4>Approval Instruction</h4>
+  <p>Review this hedge on Pangea. If hedge is ready, please select “Execute” to approve and execute.</p>
+  <p>
+    <a class="btn bold" href="{{ url }}" style="color:white; text-decoration: none; text-transform: uppercase;">Review this hedge on Pangea. If hedge is ready, please select “Execute” to approve and execute. &rarr;</a>
+  </p>
+{%  endblock %}

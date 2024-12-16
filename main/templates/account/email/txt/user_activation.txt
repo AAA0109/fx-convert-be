@@ -1,0 +1,3 @@
+Verify your email address so we know it's really you - and so we can send you important information about your Pangea account.
+Verify Email: {{ url }}
+If this wasn't you, you can safely ignore it.

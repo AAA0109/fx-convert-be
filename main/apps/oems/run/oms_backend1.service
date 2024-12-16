@@ -1,0 +1,10 @@
+[Unit]
+Description=Pangea OMS Client 1
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+Type=simple
+User=pangea
+ExecStart=/usr/local/bin/run-django deploy runoms --oms-id OMS_CLIENT1 --timeout 0.05 --batch-size 5

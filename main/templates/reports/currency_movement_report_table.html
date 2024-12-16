@@ -1,0 +1,31 @@
+{% load pangea_reports %}
+<div>
+  <h3>{{ header }}</h3>
+  <table id="result_list">
+    <thead>
+    <tr>
+      <th style="height: 31px;">Currency</th>
+      {% for value in columns %}
+        <th>{{ value }}</th>
+      {% endfor %}
+    </tr>
+    </thead>
+    <tbody>
+    {% for vl in lines %}
+      <tr>
+        <th>
+          {{ vl }}
+        </th>
+        {% for vc in columns %}
+          {% lookup warnings vl vc l1 l2 as alert %}
+          <td {% if alert %}style="background-color: #ffc4c4;"{% endif %}>
+            {% float_lookup values decimals vl vc l1 l2 %}
+          </td>
+        {% endfor %}
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+<br/>
+<br/>

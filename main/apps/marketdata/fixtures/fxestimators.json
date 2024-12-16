@@ -1,0 +1,18 @@
+[
+  {
+    "model": "marketdata.fxestimator",
+    "pk": 1,
+    "fields": {
+      "type": 1,
+      "tag": "EWMA Vol Default Estimator"
+    }
+  },
+  {
+    "model": "marketdata.fxestimator",
+    "pk": 2,
+    "fields": {
+      "type": 1,
+      "tag": "EWMA Corr. Default Estimator"
+    }
+  }
+]

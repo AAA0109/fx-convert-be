@@ -1,0 +1,43 @@
+{% extends "core/email/layout/base.html" %}
+{% load static %}
+{% block content %}
+  <table class="full-width">
+    <tr>
+      <td class="center">
+        <p><img src="{% static 'media/email/status/warning.png' %}"/></p>
+        <h3 class="uppercase">Forecasted Low Margin</h3>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p class="padded">We have forecasted that your margin account will reach unsafe levels.</p>
+      </td>
+    </tr>
+  </table>
+  <table class="full-width table striped">
+    <tr>
+      <td>Margin Account Total:</td>
+      <td>{{ margin_total }}</td>
+    </tr>
+    <tr>
+      <td>Recommended Deposit:</td>
+      <td>{{ recommended_deposit }}</td>
+    </tr>
+    <tr>
+      <td>Deposit by:</td>
+      <td>{{ deposit_date }}</td>
+    </tr>
+  <tr>
+      <td>Forecast Date:</td>
+      <td>{{ forecast_date }}</td>
+    </tr>
+    <tr>
+      <td>Forecast Margin Health:</td>
+      <td>{{ forecast_margin_health }}</td>
+    </tr>
+  </table>
+  {% include "margin/email/html/snippets/wire_instructions.html"%}
+  <p>
+    <a class="btn bold" href="{{ url }}" style="color:white; text-decoration: none; text-transform: uppercase;">Go to margin page &rarr;</a>
+  </p>
+{% endblock %}

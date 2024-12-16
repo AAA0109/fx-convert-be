@@ -1,0 +1,59 @@
+{% extends "core/email/layout/base.html" %}
+{% block content %}
+  <table class="full-width pangea-text">
+    <tr>
+        <td>
+            <span class="uppercase" style="font-size: 30px; font-weight: 500;">Transaction Authorized</span>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p>
+              The transaction has been authorized by the approver(s).
+            </p>
+        </td>
+    </tr>
+  </table>
+  <table class="full-width table striped approval pangea-text">
+    <tbody>
+        <tr>
+            <td>Execution Strategy:</td>
+            <td>{{ execution_strategy }}</td>
+        </tr>
+        <tr>
+            <td>Currency:</td>
+            <td>{{ currency }}</td>
+        </tr>
+        <tr>
+            <td>Buy Amount:</td>
+            <td>{{ buy_amount }}</td>
+        </tr>
+        <tr>
+            <td>Value Date:</td>
+            <td>{{ value_date }}</td>
+        </tr>
+        <tr>
+            <td>Beneficiary:</td>
+            <td>{{ beneficiary }}</td>
+        </tr>
+        <tr>
+            <td>Creator:</td>
+            <td>{{ creator }}</td>
+        </tr>
+        <tr>
+            <td>Approver(s):</td>
+            <td>{{ approvers }}</td>
+        </tr>
+    </tbody>
+  </table>
+  <table class="full-width table pangea-text">
+    <tr>
+        <td>
+            <a class="btn bold btn-compact" href="{{ payment_link }}"
+                style="color:white; text-decoration: none; text-transform: uppercase; display: inline-block;">
+                View Details &rarr;
+            </a>
+        </td>
+    </tr>
+  </table>
+{%  endblock %}

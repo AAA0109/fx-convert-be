@@ -1,0 +1,12 @@
+Transaction Authorized
+The transaction has been authorized by the approver(s).
+
+Execution Strategy: {{ execution_strategy }}
+Currency: {{ currency }}
+Buy Amount: {{ buy_amount }}
+Value Date: {{ value_date }}
+Beneficiary: {{ beneficiary }}
+Creator: {{ creator }}
+Approver(s): {{ approvers }}
+
+View Details: {{ payment_link }}

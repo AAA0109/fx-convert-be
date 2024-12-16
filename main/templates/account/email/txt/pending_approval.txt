@@ -1,0 +1,14 @@
+Hedge Pending: Approval Needed
+A new cashflow has been created that requires your approval
+
+Cashflow Name: {{ name }}
+Amount: {{ amount }}
+Currency: {{ currency }}
+Direction: {{ direction }}
+Payment Type: {{ payment_type }}
+Portfolio: {{ portfolio }}
+
+Approval Instruction
+Review this hedge on Pangea. If hedge is ready, please select “Execute” to approve and execute.
+
+Review Now: {{ url }}

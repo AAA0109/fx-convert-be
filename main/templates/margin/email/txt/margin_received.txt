@@ -1,0 +1,16 @@
+Margin Received
+This is confirmation we have received the following margin deposit:
+
+Amount:
+{{ amount }}
+
+Received:
+{{ date_received }}
+
+From:
+{{ from }}
+
+Method:
+{{ method }}
+
+Goto Margin Page: ({{ url }})

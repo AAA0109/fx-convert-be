@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Shell script safety settings
+set -o errexit
+set -o pipefail
+set -o nounset
+
+echo "Container started successfully. Ready for PyCharm integration."
+
+# Keep the container running
+exec tail -f /dev/null

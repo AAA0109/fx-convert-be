@@ -1,0 +1,163 @@
+[
+  {
+    "model": "marketdata.issuer",
+    "pk": 1,
+    "fields": {
+      "name": "Japan"
+    }
+  },
+  {
+    "model": "marketdata.issuer",
+    "pk": 2,
+    "fields": {
+      "name": "Canada"
+    }
+  },
+  {
+    "model": "marketdata.issuer",
+    "pk": 3,
+    "fields": {
+      "name": "United States of America"
+    }
+  },
+  {
+    "model": "marketdata.issuer",
+    "pk": 4,
+    "fields": {
+      "name": "United Mexican States"
+    }
+  },
+  {
+    "model": "marketdata.issuer",
+    "pk": 5,
+    "fields": {
+      "name": "Australia"
+    }
+  },
+  {
+    "model": "marketdata.issuer",
+    "pk": 6,
+    "fields": {
+      "name": "Republic of Korea"
+    }
+  },
+  {
+    "model": "marketdata.issuer",
+    "pk": 7,
+    "fields": {
+      "name": "EUGOV"
+    }
+  },
+  {
+    "model": "marketdata.issuer",
+    "pk": 8,
+    "fields": {
+      "name": "Germany"
+    }
+  },
+  {
+    "model": "marketdata.issuer",
+    "pk": 9,
+    "fields": {
+      "name": "France"
+    }
+  },
+  {
+    "model": "marketdata.issuer",
+    "pk": 10,
+    "fields": {
+      "name": "Spain"
+    }
+  },
+  {
+    "model": "marketdata.issuer",
+    "pk": 11,
+    "fields": {
+      "name": "Italy"
+    }
+  },
+  {
+    "model": "marketdata.issuer",
+    "pk": 12,
+    "fields": {
+      "name": "Netherlands"
+    }
+  },
+  {
+    "model": "marketdata.issuer",
+    "pk": 13,
+    "fields": {
+      "name": "Belgium"
+    }
+  },
+  {
+    "model": "marketdata.issuer",
+    "pk": 14,
+    "fields": {
+      "name": "Ireland"
+    }
+  },
+  {
+    "model": "marketdata.issuer",
+    "pk": 15,
+    "fields": {
+      "name": "Finland"
+    }
+  },
+  {
+    "model": "marketdata.issuer",
+    "pk": 16,
+    "fields": {
+      "name": "Portugal"
+    }
+  },
+  {
+    "model": "marketdata.issuer",
+    "pk": 17,
+    "fields": {
+      "name": "Greece"
+    }
+  },
+  {
+    "model": "marketdata.issuer",
+    "pk": 18,
+    "fields": {
+      "name": "Cyprus"
+    }
+  },
+  {
+    "model": "marketdata.issuer",
+    "pk": 19,
+    "fields": {
+      "name": "Slovakia"
+    }
+  },
+  {
+    "model": "marketdata.issuer",
+    "pk": 20,
+    "fields": {
+      "name": "Singapore/Republic of"
+    }
+  },
+  {
+    "model": "marketdata.issuer",
+    "pk": 21,
+    "fields": {
+      "name": "China"
+    }
+  },
+  {
+    "model": "marketdata.issuer",
+    "pk": 22,
+    "fields": {
+      "name": "Hong Kong"
+    }
+  },
+  {
+    "model": "marketdata.issuer",
+    "pk": 23,
+    "fields": {
+      "name": "United Kingdom of Great Britain and Northern Ireland"
+    }
+  }
+]

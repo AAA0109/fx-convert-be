@@ -1,0 +1,1 @@
+from main.apps.cashflow.tasks.generator import create_single_cashflow_from_generator

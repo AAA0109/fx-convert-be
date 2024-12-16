@@ -1,0 +1,17 @@
+[Unit]
+Description=Celery Flower Service
+After=network.target
+
+[Service]
+Type=simple
+User=pangea
+Group=pangea
+EnvironmentFile=/home/pangea/code/hedgedesk_dashboard/.env
+WorkingDirectory=/home/pangea/code/hedgedesk_dashboard
+ExecStart=/bin/bash -c '${CELERY_BIN} -A ${CELERY_APP} flower --port=${FLOWER_PORT} \
+    --address='0.0.0.0' --persistent=True --db="flower_db" \
+    --log-file-prefix=${FLOWER_LOG_PREFIX} --loglevel=${FLOWER_LOG_LEVEL}'
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,10 @@
+[Unit]
+Description=Pangea EMS Corpay Client 1
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+Type=simple
+User=pangea
+ExecStart=/usr/local/bin/run-django deploy runems --ems-id CORPAY1 --ems-type CORPAY --timeout 0.05 --batch-size 5

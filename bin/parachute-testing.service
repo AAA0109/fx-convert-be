@@ -1,0 +1,13 @@
+[Unit]
+Description=Parachute Testing Service
+After=network.target
+
+[Service]
+Type=simple
+User=pangea
+Group=pangea
+ExecStart=/home/pangea/parachute-testing/run_parachute_testing.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

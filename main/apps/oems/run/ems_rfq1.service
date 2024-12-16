@@ -1,0 +1,10 @@
+[Unit]
+Description=Pangea EMS RFQ Client 1
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+Type=simple
+User=pangea
+ExecStart=/usr/local/bin/run-django deploy runems --ems-id RFQ1 --ems-type RFQ --timeout 0.05 --batch-size 5

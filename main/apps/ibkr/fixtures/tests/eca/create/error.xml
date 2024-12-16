@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Process>
+  <Execution ECA_XML_Schema_Version="15-Nov-2018">
+    <Execution_Date>2022/11/30 18:56:20</Execution_Date>
+    <Process_File>panegaIO_2022-11-30_065620689_947653.xml</Process_File>
+    <Client>panegaIO</Client>
+    <Client_Master_Acct>F2008281</Client_Master_Acct>
+  </Execution>
+  <Applications>
+    <Application External_ID="PangeaJay" Status="Error">
+      <Customer>Pangea Technologies Inc</Customer>
+      <Errors>
+        <Error>Customer PangeaJay - null</Error>
+      </Errors>
+    </Application>
+  </Applications></Process>

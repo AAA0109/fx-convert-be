@@ -1,0 +1,15 @@
+Forecasted Low Margin
+We have forecasted that your margin account will reach unsafe levels.
+
+Margin Account Total:
+{{ margin_total }}
+
+Recommended Deposit:
+{{ recommended_deposit }}
+
+Deposit by:
+{{ deposit_date }}
+
+{% include "margin/email/txt/snippets/wire_instructions.txt"%}
+
+Goto Margin Page: ({{ url }})

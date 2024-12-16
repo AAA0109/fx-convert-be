@@ -1,0 +1,71 @@
+{% extends 'admin/base_site.html' %}
+
+{% block content %}
+  <style>
+    .errorlist > * {
+      color: red;
+    }
+
+    fieldset div div {
+      display: inline-block;
+      padding: 8px;
+      border: 1px solid gray;
+      margin: 5px;
+    }
+  </style>
+
+  <form method="post" target="#">
+
+    {#    {% csrf_token %}#}
+    {##}
+    {#    {% if form.non_field_errors %}#}
+    {#      <ul>#}
+    {#        {% for error in form.non_field_errors %}#}
+    {#          <li>{{ error }}</li>#}
+    {#        {% endfor %}#}
+    {#      </ul>#}
+    {#    {% endif %}#}
+    {##}
+    {#    {% for hidden_field in form.hidden_fields %}#}
+    {#      {% if hidden_field.errors %}#}
+    {#        <ul>#}
+    {#          {% for error in hidden_field.errors %}#}
+    {#            <li>(Hidden field {{ hidden_field.name }}) {{ error }}</li>#}
+    {#          {% endfor %}#}
+    {#        </ul>#}
+    {#      {% endif %}#}
+    {#      {{ hidden_field }}#}
+    {#    {% endfor %}#}
+    {##}
+    <fieldset class="module aligned ">
+      {#    <table>#}
+      {#      {% for field in form.visible_fields %}#}
+      {#        <tr>#}
+      {#          <th>{{ field.label_tag }}</th>#}
+      {#          <td>#}
+      {#            {{ field.errors }}#}
+      {#            {{ field }}#}
+      {#            {{ field.help_text }}#}
+      {#          </td>#}
+      {#        </tr>#}
+      {#      {% endfor %}#}
+      {#    </table>#}
+      <div>
+          {% for service in services %}
+            <div>
+              <a href="{{ service.start_url }}" class="addlink">
+                {{ service.name }}
+              </a>
+            </div>
+            {% empty %}
+            <div class="errorlist">Sorry, no services ready to connect.</div>
+          {% endfor %}
+      </div>
+    </fieldset>
+
+    <div class="submit-row">
+      <input type="button" value="Cancel"
+             onclick="location.href='{{ back_url }}';">
+    </div>
+  </form>
+{% endblock %}

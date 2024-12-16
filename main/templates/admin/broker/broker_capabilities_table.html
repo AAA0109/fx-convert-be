@@ -1,0 +1,60 @@
+{% load custom_filters %}
+<style>
+  .broker-table-container {
+    width: auto;
+    overflow-x: auto;
+    position: relative;
+  }
+
+  .broker-table {
+    width: auto;
+  }
+
+  #changelist .broker-table thead tr th,
+  #changelist .broker-table tbody tr td {
+    text-align: center;
+    border: 1px solid var(--primary-fg) !important;
+    padding: 8px;
+  }
+
+  #changelist .broker-table .capability-column {
+    left: 0;
+    z-index: 1;
+    font-weight: bold;
+    text-align: left;
+    width: 80px;
+  }
+
+</style>
+{% if broker_data %}
+  <div class="broker-table-container">
+    <table class="broker-table">
+      <thead>
+      <tr>
+        <th class="capability-column">Capabilities</th>
+        {% for broker in broker_data.keys %}
+          <th>{{ broker }}</th>
+        {% endfor %}
+      </tr>
+      </thead>
+      <tbody>
+      {% for capability in capabilities %}
+        <tr>
+          <td class="capability-column">{{ capability }}</td>
+          {% for broker_capabilities in broker_data.values %}
+            <td>
+              {% if broker_capabilities|get_item:capability %}
+                ✅
+              {% else %}
+                ⛔
+              {% endif %}
+            </td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% else %}
+  <p>No broker capabilities configured.</p>
+{% endif %}

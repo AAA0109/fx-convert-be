@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+exec watchfiles --filter python "python manage.py runems --ems-id TEST_RFQ1 --timeout 1.0 --ems-type RFQ"

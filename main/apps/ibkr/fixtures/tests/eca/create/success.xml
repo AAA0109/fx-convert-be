@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Process>
+  <Execution ECA_XML_Schema_Version="15-Nov-2018">
+    <Execution_Date>2022/11/30 18:59:09</Execution_Date>
+    <Process_File>panegaIO_2022-11-30_065909523_171713.xml</Process_File>
+    <Client>panegaIO</Client>
+    <Client_Master_Acct>F2008281</Client_Master_Acct>
+  </Execution>
+  <Applications>
+    <Application External_ID="PangeaJay" Status="Success">
+      <Customer>Pangea Technologies Inc</Customer>
+      <Users>
+        <User external_id="PangeaJay" user_id="58379606">pangea659</User>
+      </Users>
+      <Accounts>
+        <Account external_id="PangeaJay" status="P">U91035882</Account>
+      </Accounts>
+      <Entities>
+        <Entity external_id="PangeaJay">163906919</Entity>
+      </Entities>
+      <Pending_Tasks>
+        <Task Form_Number="1009" Form_Name="Margin and Products" Action="to complete" Is_Required_For_Approval="false" Is_Required_For_Trading="false" Is_Online_Task="true" />
+        <Task Form_Number="1038" Form_Name="Org Applicant Information" Action="to complete" Is_Required_For_Approval="true" Is_Required_For_Trading="false" Is_Online_Task="true" />
+        <Task Form_Number="1101" Form_Name="Funding Notification" Action="to complete" Is_Required_For_Approval="false" Is_Required_For_Trading="false" Is_Online_Task="true" />
+        <Task Form_Number="2107" Form_Name="Customer Financial Info" Action="to complete" Is_Required_For_Approval="true" Is_Required_For_Trading="false" Is_Online_Task="true" />
+        <Task Form_Number="2109" Form_Name="Legal Acknowledgement" Action="to complete" Is_Required_For_Approval="false" Is_Required_For_Trading="false" Is_Online_Task="true" />
+        <Task Form_Number="2119" Form_Name="Organization Regulatory Info" Action="to complete" Is_Required_For_Approval="true" Is_Required_For_Trading="false" Is_Online_Task="true" />
+        <Task Form_Number="2134" Form_Name="Owners Information" Action="to complete" Is_Required_For_Approval="false" Is_Required_For_Trading="false" Is_Online_Task="true" />
+        <Task Form_Number="2135" Form_Name="Applying Individual" Action="to complete" Is_Required_For_Approval="true" Is_Required_For_Trading="false" Is_Online_Task="true" />
+        <Task Form_Number="2150" Form_Name="Source of Wealth" Action="to complete" Is_Required_For_Approval="false" Is_Required_For_Trading="false" Is_Online_Task="true" />
+        <Task Form_Number="2180" Form_Name="Regulatory Affiliation Designation" Action="to complete" Is_Required_For_Approval="false" Is_Required_For_Trading="false" Is_Online_Task="true" />
+        <Task Form_Number="2191" Form_Name="Application Review" Action="to complete" Is_Required_For_Approval="false" Is_Required_For_Trading="false" Is_Online_Task="true" />
+        <Task Form_Number="2192" Form_Name="Privacy Statement" Action="to sign" Is_Required_For_Approval="true" Is_Required_For_Trading="false" Is_Online_Task="true" />
+        <Task Form_Number="2314" Form_Name="Owners Certified Information" Action="to sign" Is_Required_For_Approval="true" Is_Required_For_Trading="false" Is_Online_Task="true" />
+        <Task Form_Number="3024" Form_Name="Forex and Multi-Currency Risk Disclosure" Action="to sign" Is_Required_For_Approval="true" Is_Required_For_Trading="false" Is_Online_Task="true" />
+        <Task Form_Number="3070" Form_Name="Business Continuity Plan Disclosure" Action="to sign" Is_Required_For_Approval="true" Is_Required_For_Trading="false" Is_Online_Task="true" />
+        <Task Form_Number="3071" Form_Name="Day Trading Risk Disclosure" Action="to sign" Is_Required_For_Approval="true" Is_Required_For_Trading="false" Is_Online_Task="true" />
+        <Task Form_Number="3074" Form_Name="Order Routing and Payment for Order Flow Disclosure" Action="to sign" Is_Required_For_Approval="true" Is_Required_For_Trading="false" Is_Online_Task="true" />
+        <Task Form_Number="3081" Form_Name="Notice Regarding USA Patriot Act Section 311" Action="to sign" Is_Required_For_Approval="false" Is_Required_For_Trading="false" Is_Online_Task="true" />
+        <Task Form_Number="3089" Form_Name="Global Financial Information Services Subscriber Agreement" Action="to sign" Is_Required_For_Approval="true" Is_Required_For_Trading="false" Is_Online_Task="true" />
+        <Task Form_Number="3094" Form_Name="Notice Regarding NFA's BASIC System" Action="to sign" Is_Required_For_Approval="true" Is_Required_For_Trading="false" Is_Online_Task="true" />
+        <Task Form_Number="3107" Form_Name="Questionnaire for Bearer Shares" Action="to complete" Is_Required_For_Approval="true" Is_Required_For_Trading="false" Is_Online_Task="true" />
+        <Task Form_Number="3204" Form_Name="Customer Agreement Institutional Services" Action="to sign" Is_Required_For_Approval="false" Is_Required_For_Trading="false" Is_Online_Task="true" />
+        <Task Form_Number="3380" Form_Name="Questionnaire for ORG High Risk Contribution Countries" Action="to complete" Is_Required_For_Approval="false" Is_Required_For_Trading="false" Is_Online_Task="true" />
+        <Task Form_Number="4016" Form_Name="After-hours Trading Risk Disclosure" Action="to sign" Is_Required_For_Approval="true" Is_Required_For_Trading="false" Is_Online_Task="true" />
+        <Task Form_Number="4304" Form_Name="Interactive Brokers LLC Regulation Best Interest Disclosure" Action="to sign" Is_Required_For_Approval="true" Is_Required_For_Trading="false" Is_Online_Task="true" />
+        <Task Form_Number="5003" Form_Name="Tax Withholding Qualification" Action="to complete" Is_Required_For_Approval="true" Is_Required_For_Trading="false" Is_Online_Task="true" />
+        <Task Form_Number="5013" Form_Name="Trading Control and Ownership Certification" Action="to sign" Is_Required_For_Approval="true" Is_Required_For_Trading="false" Is_Online_Task="true" />
+        <Task Form_Number="6107" Form_Name="Advisor Fees - Client Review" Action="to complete" Is_Required_For_Approval="true" Is_Required_For_Trading="false" Is_Online_Task="true" />
+        <Task Form_Number="6108" Form_Name="Agreement Limiting Interactive Brokers Liability" Action="to sign" Is_Required_For_Approval="true" Is_Required_For_Trading="false" Is_Online_Task="true" />
+        <Task Form_Number="6112" Form_Name="Client Financial Advisor Agreement" Action="to sign" Is_Required_For_Approval="true" Is_Required_For_Trading="false" Is_Online_Task="true" />
+        <Task Form_Number="9978" Form_Name="Questionnaire - Appliecant Business Types" Action="to complete" Is_Required_For_Approval="true" Is_Required_For_Trading="false" Is_Online_Task="true" />
+        <Task Form_Number="9979" Form_Name="Questionnaire - Entity Business Types" Action="to complete" Is_Required_For_Approval="true" Is_Required_For_Trading="false" Is_Online_Task="true" />
+        <Task Form_Number="9130" Form_Name="Stock Stop Order Disclosure" Action="to sign" Is_Required_For_Approval="true" Is_Required_For_Trading="false" Is_Online_Task="true" />
+      </Pending_Tasks>
+    </Application>
+  </Applications></Process>

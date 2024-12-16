@@ -1,0 +1,76 @@
+name: Run Django-Test for Dashboard using Postgres
+
+# Controls when the workflow will run
+on:
+    # Allows you to call this workflow within another workflow
+    workflow_call:
+    # Allows you to run this workflow manually from the Actions tab
+    workflow_dispatch:
+    # Triggered based on the git event type
+    #  push:
+    #    branches: []
+    pull_request:
+        branches: [ master, deploy/development, deploy/staging, deploy/production, deploy/demo ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+    # This workflow contains a single job called "build"
+    build:
+        # The type of runner that the job will run on
+        runs-on: ubuntu-latest
+        # Add in environment variables for the entire "build" job
+        env:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_HOST: localhost # default host value for the database
+            POSTGRES_DB: pangeatestdb
+            POSTGRES_PORT: 5432
+        services:
+            postgres:
+                image: postgres:12
+                env:
+                    POSTGRES_USER: ${{ env.POSTGRES_USER }}
+                    POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+                    POSTGRES_DB: ${{ env.POSTGRES_DB }}
+                ports:
+                    - 5432:5432
+                options:
+                    --health-cmd pg_isready
+                    --health-interval 10s
+                    --health-timeout 5s
+                    --health-retries 5
+        # If you want to test multiple python version(s)
+        strategy:
+            matrix:
+                python-version: [ "3.10" ] # ["3.8", "3.9", "3.10"]
+        # Steps represent a sequence of tasks that will be executed as part of the job
+        steps:
+            # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+            -   name: Checkout code
+                uses: actions/checkout@v2
+            -   name: Setup Python ${{ matrix.python-version }}
+                uses: actions/setup-python@v2
+                with:
+                    python-version: ${{ matrix.python-version }}
+            -   name: Install requirements
+                run: |
+                    pip install -r requirements/tests.txt
+            -   name: Run Tests
+                # Step specific environment variables
+                env:
+                    DEBUG: "0"
+                    DJANGO_SETTINGS_MODULE: "main.settings.tests"
+                    DB_USER: ${{ env.POSTGRES_USER }}
+                    DB_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+                    DB_HOST: ${{ env.POSTGRES_HOST }}
+                    DB_NAME: ${{ env.POSTGRES_DB }}
+                    DB_PORT: ${{ env.POSTGRES_PORT }}
+                    TEST_STRIPE_API_KEY: ${{ secrets.TEST_STRIPE_API_KEY }}
+                    HUBSPOT_ACCESS_TOKEN: ${{ secrets.HUBSPOT_ACCESS_TOKEN }}
+                    SLACK_NOTIFICATIONS_APP_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_APP_BOT_TOKEN }}
+                    SLACK_NOTIFICATIONS_CHANNEL: ${{ secrets.SLACK_NOTIFICATIONS_CHANNEL }}
+                    VERTO_API_BASE: ${{ secrets.VERTO_API_BASE }}
+                    VERTO_CLIENT_ID: ${{ secrets.VERTO_CLIENT_ID }}
+                    VERTO_API_KEY: ${{ secrets.VERTO_API_KEY }}
+                run: |
+                    python manage.py test -v 2 --noinput --parallel

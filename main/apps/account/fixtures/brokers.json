@@ -1,0 +1,16 @@
+[
+  {
+    "model": "account.broker",
+    "pk": 1,
+    "fields": {
+      "name": "Interactive Brokers"
+    }
+  },
+  {
+    "model": "account.broker",
+    "pk": 2,
+    "fields": {
+      "name": "Forex.com"
+    }
+  }
+]

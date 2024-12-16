@@ -1,0 +1,137 @@
+CURRENCY,WALLETS,SPOT_LHS,SPOT_RHS,FWD_LHS_CAD,FWD_LHS_EUR,FWD_LHS_GBP,FWD_LHS_USD,DELIVERABLE_LHS,API,FWD_RHS,DELIVERABLE_RHS,CORPAY_COST,CORPAY_FEE,PANGEA_FEE,DELIVERY_SLA,DEADLINE_EST
+AED,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,0.30%,0.20%,0.30%,2 Business Days,9:00 AM
+AUD,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,0.13%,0.10%,0.40%,1 Business Day,5:00 PM
+CAD,Yes,Yes,Yes,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,0.12%,0.10%,0.40%,Same Day,4:00 PM
+CHF,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,0.12%,0.20%,0.30%,Same Day,4:00 AM
+CZK,Yes,Yes,Yes,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,0.30%,0.20%,0.40%,Same Day,4:00 AM
+DKK,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,0.21%,0.20%,0.30%,1 Business Day,5:00 AM
+EUR,Yes,Yes,Yes,Yes,,Yes,Yes,Yes,Yes,Yes,Yes,0.11%,0.10%,0.40%,Same Day,4:00 PM
+GBP,Yes,Yes,Yes,Yes,Yes,,Yes,Yes,Yes,Yes,Yes,0.12%,0.10%,0.40%,1 Business Day,10:00 AM
+HKD,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,0.15%,0.10%,0.40%,3 Business Days,9:00 AM
+HUF,Yes,Yes,Yes,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,0.45%,0.30%,0.30%,1 Business Day,9:00 AM
+JPY,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,0.12%,0.10%,0.40%,Same Day,12:00 AM
+MXN,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,0.16%,0.10%,0.40%,1 Business Day,1:00 PM
+NOK,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,0.14%,0.20%,0.30%,1 Business Day,9:00 AM
+NZD,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,0.13%,0.10%,0.40%,1 Business Day,5:00 PM
+PLN,Yes,Yes,Yes,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,0.16%,0.20%,0.40%,1 Business Day,9:00 AM
+SEK,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,0.11%,0.20%,0.30%,1 Business Day,9:00 AM
+SGD,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,0.10%,0.20%,0.30%,2 Business Days,4:00 AM
+THB,Yes,Yes,Yes,Yes,Yes,Yes,Yes,,Yes,Yes,Yes,0.34%,0.20%,0.40%,2 Business Days,4:00 AM
+ZAR,Yes,Yes,Yes,,,,Yes,Yes,Yes,Yes,Yes,0.30%,0.20%,0.50%,2 Business Days,9:00 AM
+USD,Yes,Yes,,Yes,Yes,Yes,Yes,Yes,Yes,,,,,,Same Day,4:00 PM
+ALL,,Yes,,,,,,,,,,2.40%,0.40%,0.60%,4 Business Days,2:00 PM
+AMD,,Yes,,,,,,,,,,0.60%,0.50%,0.50%,4 Business Days,2:00 PM
+ANG,,Yes,,,,,,,,,,,0.50%,0.50%,2 Business Days,4:00 PM
+AOA,,Yes,,,,,,,,Yes,,3.10%,0.40%,0.60%,4 Business Days,9:00 AM
+ARS,,Yes,,,,Yes,Yes,,,Yes,,0.60%,,0.70%,4 Business Days,2:00 PM
+AWG,,Yes,,,,,,,,,,0.60%,0.50%,0.50%,4 Business Days,2:00 PM
+AZN,,Yes,,,,,,,,,,,0.50%,0.50%,4 Business Days,2:00 PM
+BAM,,Yes,,,,,,,,,,,0.40%,0.60%,4 Business Days,2:00 PM
+BBD,,Yes,,,,,,,,,,,0.50%,0.50%,4 Business Days,2:00 PM
+BDT,,Yes,,,,,,,,Yes,,4.10%,0.30%,0.40%,Same Day,12:00 AM
+BGN,Yes,Yes,Yes,,,,,,,Yes,Yes,0.60%,0.30%,0.30%,Same Day,4:00 AM
+BHD,Yes,Yes,Yes,Yes,Yes,Yes,Yes,,,Yes,Yes,0.60%,0.50%,0.50%,2 Business Days,9:00 AM
+BIF,,Yes,,,,,,,,,,,0.50%,0.50%,4 Business Days,9:00 AM
+BMD,,Yes,,,,,,,,,,,0.50%,0.50%,4 Business Days,2:00 PM
+BND,,Yes,,,,,,,,,,2.50%,0.50%,0.50%,4 Business Days,2:00 PM
+BOB,,Yes,,,,,,,,,,1.50%,0.30%,0.50%,4 Business Days,2:00 PM
+BRL,,Yes,,Yes,Yes,Yes,Yes,,,,,1.10%,0.30%,0.50%,Same Day,12:00 PM
+BSD,,Yes,,,,,,,,,,,0.50%,0.50%,4 Business Days,2:00 PM
+BTN,,Yes,,,,,,,,,,0.60%,0.50%,0.50%,4 Business Days,2:00 PM
+BWP,Yes,Yes,Yes,,,,,,,Yes,Yes,0.60%,0.50%,0.50%,Talk to Sales,
+BZD,,Yes,,,,,,,,,,0.60%,0.30%,0.50%,4 Business Days,2:00 PM
+CLP,,Yes,,,Yes,,Yes,,,Yes,,1.10%,0.30%,0.50%,2 Business Days,2:00 PM
+CNH,Yes,Yes,,Yes,Yes,Yes,Yes,,,Yes,Yes,,0.40%,0.30%,4 Business Days,9:00 AM
+CNY,Yes,Yes,,Yes,Yes,Yes,Yes,,,Yes,,0.70%,0.20%,0.50%,4 Business Days,9:00 AM
+COP,,Yes,,,,,Yes,,,Yes,,0.60%,0.20%,0.60%,Same Day,12:00 AM
+CRC,,Yes,,,,,,,,Yes,,0.60%,0.30%,0.50%,4 Business Days,2:00 PM
+CVE,,Yes,,,,,,,,,,1.70%,0.50%,0.50%,4 Business Days,2:00 PM
+DJF,,Yes,,,,,,,,,,,0.40%,0.60%,4 Business Days,9:00 AM
+DOP,,Yes,,,,,,,,Yes,,2.30%,0.30%,0.50%,4 Business Days,2:00 PM
+DZD,,Yes,,,,,,,,Yes,,0.60%,0.40%,0.60%,4 Business Days,9:00 AM
+EGP,,Yes,,,,,Yes,,,Yes,,1.00%,0.40%,0.40%,4 Business Days,2:00 PM
+ERN,,Yes,,,,,,,,,,,0.40%,0.60%,4 Business Days,3:00 PM
+ETB,,Yes,,,,,,,,Yes,,3.10%,0.30%,0.60%,4 Business Days,3:00 PM
+FJD,,Yes,,,,,,,,,,,0.50%,0.50%,2+ Business Days,2:00 PM
+FKP,,Yes,,,,,,,,,,,0.50%,0.50%,4 Business Days,2:00 PM
+GEL,,Yes,,,,,,,,,,2.00%,0.40%,0.40%,4 Business Days,2:00 PM
+GHS,Yes,Yes,Yes,,,,,,,Yes,Yes,3.10%,0.30%,0.50%,Same Day,12:00 AM
+GIP,,Yes,,,,,,,,,,0.60%,0.40%,0.60%,4 Business Days,2:00 PM
+GMD,,Yes,,,,,,,,,,0.60%,0.40%,0.60%,1 Business Day,12:00 AM
+GNF,,Yes,,,,,,,,,,2.20%,0.50%,0.50%,3 Business Days,2:00 PM
+GTQ,,Yes,,,,,,,,Yes,,0.60%,0.30%,0.50%,4 Business Days,10:45 AM
+GYD,,Yes,,,,,,,,,,2.60%,0.50%,0.50%,4 Business Days,2:00 PM
+HNL,,Yes,,,,,,,,Yes,,0.60%,0.30%,0.50%,4 Business Days,2:00 PM
+HTG,,Yes,,,,,,,,,,,0.40%,0.60%,4 Business Days,2:00 PM
+IDR,,Yes,,,,,Yes,,,Yes,,0.85%,0.20%,0.40%,1 Business Day,12:30 AM
+ILS,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,,Yes,Yes,0.30%,0.20%,0.40%,2 Business Days,3:00 AM
+INR,,Yes,,Yes,Yes,Yes,Yes,,,Yes,,0.80%,0.10%,0.40%,3 Business Days,12:30 AM
+ISK,,Yes,,,,,,,,,,2.60%,0.30%,0.30%,Same Day,4:00 AM
+JMD,,Yes,,,,,,,,,,,0.50%,0.50%,1 Business Day,12:00 PM
+JOD,Yes,Yes,Yes,,,Yes,Yes,,,Yes,Yes,2.80%,0.40%,0.60%,2 Business Days,2:00 PM
+KES,Yes,Yes,Yes,,,,Yes,Yes,,Yes,Yes,4.10%,0.20%,0.60%,2 Business Days,9:00 AM
+KGS,,Yes,,,,,,,,,,0.60%,0.50%,0.50%,4 Business Days,2:00 PM
+KHR,,Yes,,,,,,,,,,0.80%,0.40%,0.40%,4 Business Days,2:00 PM
+KMF,,Yes,,,,,,,,,,,0.40%,0.60%,4 Business Days,9:00 AM
+KRW,,Yes,,,Yes,Yes,Yes,Yes,,Yes,,1.60%,0.20%,0.40%,2 Business Days,9:00 AM
+KWD,Yes,Yes,Yes,,Yes,Yes,Yes,,,Yes,Yes,0.60%,0.30%,0.30%,2 Business Days,2:00 PM
+KYD,,Yes,,,,,,,,,,0.60%,0.50%,0.50%,4 Business Days,2:00 PM
+KZT,,Yes,,Yes,Yes,Yes,Yes,,,Yes,,0.60%,0.50%,0.50%,4 Business Days,2:00 PM
+LAK,,Yes,,,,,,,,,,1.00%,0.30%,0.50%,4 Business Days,2:00 PM
+LKR,,Yes,,,,,,,,Yes,,0.60%,0.30%,0.40%,,
+LRD,,Yes,,,,,,,,,,,0.50%,0.50%,4 Business Days,9:00 AM
+LSL,Yes,Yes,Yes,,,,,,,Yes,Yes,0.60%,0.40%,0.60%,4 Business Days,2:00 PM
+LTL,,Yes,,,,,,,,,,,0.40%,0.60%,Same Day,4:00 AM
+MAD,,Yes,,,,Yes,Yes,,,Yes,Yes,,0.30%,0.70%,3 Business Days,10:30 AM
+MDL,,Yes,,,,,,,,,,0.60%,0.30%,0.50%,4 Business Days,2:00 PM
+MGA,,Yes,,,,,,,,,,0.60%,0.40%,0.50%,4 Business Days,2:00 PM
+MKD,,Yes,,,,,,,,,,0.60%,0.40%,0.60%,4 Business Days,2:00 PM
+MNT,,Yes,,,,,,,,,,0.60%,0.50%,0.50%,4 Business Days,2:00 PM
+MOP,,Yes,,,,,,,,,,0.60%,0.40%,0.60%,4 Business Days,2:00 PM
+MRU,,Yes,,,,,,,,,,,0.50%,0.50%,4 Business Days,2:00 PM
+MUR,,Yes,,,,,,,,Yes,Yes,0.60%,0.50%,0.50%,4 Business Days,2:00 PM
+MVR,,Yes,,,,,,,,,,,0.50%,0.50%,4 Business Days,2:00 PM
+MWK,,Yes,,,,,,,,,,0.60%,0.30%,0.60%,3 Business Days,2:00 PM
+MYR,,Yes,,Yes,Yes,Yes,Yes,,,Yes,,0.60%,0.20%,0.40%,Same Day,8:00 AM
+MZN,,Yes,,,,,,,,Yes,,1.90%,0.40%,0.50%,4 Business Days,2:00 PM
+NAD,,Yes,,,,,,,,,,1.40%,0.40%,0.60%,4 Business Days,2:00 PM
+NGN,,Yes,,,,,,,,Yes,,1.40%,0.30%,0.60%,4 Business Days,2:00 PM
+NIO,,Yes,,,,,,,,,,1.20%,0.30%,0.70%,4 Business Days,2:00 PM
+NPR,,Yes,,,,,,,,,,1.80%,0.30%,0.50%,4 Business Days,2:00 PM
+OMR,Yes,Yes,Yes,,Yes,,Yes,,,Yes,Yes,,0.40%,0.60%,2 Business Days,9:00 AM
+PAB,,Yes,,,,,,,,,,,0.30%,0.50%,4 Business Days,2:00 PM
+PEN,,Yes,,,,,Yes,,,Yes,,0.60%,0.30%,0.50%,1 Business Day,11:30 AM
+PGK,,Yes,,,,,,,,Yes,,0.60%,0.50%,0.50%,4 Business Days,2:00 PM
+PHP,,Yes,,,,,Yes,,,Yes,,1.10%,0.20%,0.40%,Same Day,3:00 AM
+PKR,,Yes,,,,,,,,Yes,,2.00%,0.30%,0.40%,4 Business Days,2:00 PM
+PYG,,Yes,,,,,,,,,,1.50%,0.40%,0.60%,4 Business Days,2:00 PM
+QAR,Yes,Yes,Yes,,Yes,Yes,Yes,,,Yes,Yes,0.60%,0.40%,0.60%,2 Business Days,9:00 AM
+RON,Yes,Yes,Yes,,Yes,Yes,Yes,,,Yes,Yes,0.60%,0.30%,0.30%,Same Day,2:00 PM
+RSD,,Yes,,,,,,,,,,0.60%,0.40%,0.40%,4 Business Days,4:00 AM
+RWF,,Yes,,,,,,,,,,0.60%,0.30%,0.60%,3 Business Days,2:00 PM
+SAR,,Yes,Yes,,Yes,Yes,Yes,Yes,,Yes,Yes,0.10%,0.30%,0.70%,2 Business Days,9:00 AM
+SBD,,Yes,,,,,,,,,,0.60%,0.50%,0.50%,4 Business Days,2:00 PM
+SCR,,Yes,,,,,,,,,,,0.50%,0.50%,4 Business Days,9:00 AM
+SLL,,Yes,,,,,,,,,,2.10%,0.50%,0.50%,4 Business Days,2:00 PM
+SRD,,Yes,,,,,,,,,,,0.50%,0.50%,4 Business Days,2:00 PM
+STN,,Yes,,,,,,,,,,,0.50%,0.50%,Same Day,12:00 AM
+SZL,,Yes,,,,,,,,,,1.40%,0.50%,0.50%,4 Business Days,2:00 PM
+TJS,,Yes,,,,,,,,,,0.60%,0.50%,0.50%,4 Business Days,2:00 PM
+TMT,,Yes,,,,,,,,,,,0.50%,0.50%,4 Business Days,2:00 PM
+TND,Yes,Yes,Yes,,,,,,,Yes,Yes,0.60%,0.50%,0.50%,2 Business Days,9:00 AM
+TOP,,Yes,,,,,,,,,,,0.50%,0.50%,4 Business Days,2:00 PM
+TRY,Yes,Yes,Yes,,Yes,Yes,Yes,Yes,,Yes,Yes,0.60%,0.30%,0.50%,2 Business Days,9:00 AM
+TTD,,Yes,,,,,,,,,,,0.50%,0.50%,4 Business Days,2:00 PM
+TWD,,Yes,,,Yes,Yes,Yes,,,Yes,,1.60%,0.10%,0.40%,4 Business Days,2:00 PM
+TZS,,Yes,,,,,,,,Yes,,0.60%,0.30%,0.60%,4 Business Days,2:00 PM
+UGX,Yes,Yes,Yes,,,Yes,Yes,Yes,,Yes,Yes,0.60%,0.20%,0.60%,2 Business Days,9:00 AM
+UYU,,Yes,,,,,,,,,,0.60%,0.40%,0.40%,1 Business Day,12:30 PM
+UZS,,Yes,,,,,,,,,,0.60%,0.40%,0.60%,4 Business Days,2:00 PM
+VND,,Yes,,,,,,,,,,2.10%,0.30%,0.50%,4 Business Days,2:00 PM
+VUV,,Yes,,,,,,,,,,,0.50%,0.50%,4 Business Days,2:00 PM
+WST,,Yes,,,,,,,,,,,0.50%,0.50%,4 Business Days,2:00 PM
+XAF,,Yes,,,,,,,,,,0.60%,0.50%,0.40%,4 Business Days,2:00 PM
+XCD,,Yes,,,,,,,,,,,0.50%,0.50%,~4 Business Days,12:00 AM
+XOF,,Yes,,,,,,,,,,1.70%,0.50%,0.40%,1 Business Day,12:00 AM
+XPF,,Yes,,,,,,,,,,,0.50%,0.50%,2 Business Days,2:00 PM
+ZMW,,Yes,,,,,,,,Yes,Yes,1.10%,0.30%,0.60%,3 Business Days,2:00 PM

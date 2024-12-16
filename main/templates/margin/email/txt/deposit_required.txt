@@ -1,0 +1,15 @@
+Deposit Required
+Your margin account has decreased to potentially unsafe levels.
+
+Margin Account Total:
+{{ margin_total }}
+
+Recommended: Deposit:
+{{ recommended_deposit }}
+
+Margin Health Score:
+{{ margin_health_score }}/100
+
+{% include "margin/email/txt/snippets/wire_instructions.txt" %}
+
+Goto Margin Page: ({{ url }})

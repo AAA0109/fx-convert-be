@@ -1,0 +1,2 @@
+from .test_integration import BeneficiaryViewSetIntegrationTests
+from .test_viewsets import BeneficiaryViewSetTestCase

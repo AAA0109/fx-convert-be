@@ -1,0 +1,458 @@
+timeout: 5400s # 90 x 60m
+steps:
+
+    # dashboard:docker:pull:base
+    -   id: 'dashboard:docker:pull:base'
+        name: 'gcr.io/cloud-builders/docker'
+        waitFor: [ '-' ]
+        entrypoint: 'bash'
+        allowFailure: true
+        args: [
+            '-c',
+            'docker pull us-central1-docker.pkg.dev/$PROJECT_ID/pangea-docker-repository/$_APP_ENVIRONMENT-pangea-dashboard-base:$_APP_ENVIRONMENT'
+        ]
+
+    # dashboard:docker:build:base
+    -   id: 'dashboard:docker:build:base'
+        name: 'gcr.io/cloud-builders/docker'
+        waitFor: [ 'dashboard:docker:pull:base' ]
+        allowFailure: false
+        args: [
+            'build',
+            '--cache-from=us-central1-docker.pkg.dev/$PROJECT_ID/pangea-docker-repository/$_APP_ENVIRONMENT-pangea-dashboard-base:$_APP_ENVIRONMENT',
+            '--tag=us-central1-docker.pkg.dev/$PROJECT_ID/pangea-docker-repository/$_APP_ENVIRONMENT-pangea-dashboard-base:$SHORT_SHA',
+            '--file=dockerfiles/Dockerfile__Base',
+            '.'
+        ]
+
+    # dashboard:docker:tag:updated:pangea__api__base
+    -   id: 'dashboard:docker:tag:updated:pangea__api__base'
+        name: 'gcr.io/cloud-builders/docker'
+        waitFor: [ 'dashboard:docker:build:base' ]
+        allowFailure: false
+        args: [
+            'image',
+            'tag',
+            'us-central1-docker.pkg.dev/$PROJECT_ID/pangea-docker-repository/$_APP_ENVIRONMENT-pangea-dashboard-base:$SHORT_SHA',
+            'pangea__api__base',
+        ]
+
+    # dashboard:docker:pull:api
+    -   id: 'dashboard:docker:pull:api'
+        name: 'gcr.io/cloud-builders/docker'
+        waitFor: [ '-' ]
+        entrypoint: 'bash'
+        allowFailure: true
+        args: [
+            '-c',
+            'docker pull us-central1-docker.pkg.dev/$PROJECT_ID/pangea-docker-repository/$_APP_ENVIRONMENT-pangea-dashboard-api:$_APP_ENVIRONMENT'
+        ]
+
+    # dashboard:docker:build:api
+    -   id: 'dashboard:docker:build:api'
+        name: 'gcr.io/cloud-builders/docker'
+        waitFor: [ 'dashboard:docker:tag:updated:pangea__api__base' ]
+        allowFailure: false
+        args: [
+            'build',
+            '--cache-from=us-central1-docker.pkg.dev/$PROJECT_ID/pangea-docker-repository/$_APP_ENVIRONMENT-pangea-dashboard-api:$_APP_ENVIRONMENT',
+            '--tag=us-central1-docker.pkg.dev/$PROJECT_ID/pangea-docker-repository/$_APP_ENVIRONMENT-pangea-dashboard-api:$SHORT_SHA',
+            '--file=dockerfiles/Dockerfile__Dashboard',
+            '.'
+        ]
+
+    # dashboard:docker:push:base
+    -   id: 'dashboard:docker:push:base'
+        name: 'gcr.io/cloud-builders/docker'
+        waitFor: [ 'dashboard:docker:build:base' ]
+        allowFailure: false
+        args: [
+            'push',
+            'us-central1-docker.pkg.dev/$PROJECT_ID/pangea-docker-repository/$_APP_ENVIRONMENT-pangea-dashboard-base:$SHORT_SHA'
+        ]
+
+    # dashboard:docker:push:api
+    -   id: 'dashboard:docker:push:api'
+        name: 'gcr.io/cloud-builders/docker'
+        waitFor: [ 'dashboard:docker:build:api' ]
+        allowFailure: false
+        args: [
+            'push',
+            'us-central1-docker.pkg.dev/$PROJECT_ID/pangea-docker-repository/$_APP_ENVIRONMENT-pangea-dashboard-api:$SHORT_SHA'
+        ]
+
+    # dashboard:docker:tests
+    -   id: 'dashboard:docker:tests'
+        name: 'gcr.io/google-appengine/exec-wrapper'
+        waitFor: [ 'dashboard:docker:push:api' ]
+        allowFailure: true
+        args: [ '-i', 'us-central1-docker.pkg.dev/$PROJECT_ID/pangea-docker-repository/$_APP_ENVIRONMENT-pangea-dashboard-api:$SHORT_SHA',
+                '-s', '$PROJECT_ID:$_DB_REGION:$_DB_INSTANCE',
+                '-e', 'PROJECT_ID=${PROJECT_ID}',
+                '-e', 'GCP_PROJECT_ID=${PROJECT_ID}',
+                '-e', 'DB_REGION=$_DB_REGION',
+                '-e', 'DB_INSTANCE=$_DB_INSTANCE',
+                '-e', 'ALLOWED_HOSTS=$_ALLOWED_HOSTS',
+                '-e', 'APP_ENVIRONMENT=$_APP_ENVIRONMENT',
+                '-e', 'DB_HOST=/cloudsql/$PROJECT_ID:$_DB_REGION:$_DB_INSTANCE',
+                '-e', 'DB_NAME=$_DB_NAME',
+                '-e', 'DB_PORT=$_DB_PORT',
+                '-e', 'DB_USER=$_DB_USER',
+                '-e', 'DEBUG=$_DEBUG',
+                '-e', 'DJANGO_SETTINGS_MODULE="main.settings.tests"',
+                '-e', 'GS_BUCKET_NAME=$_GS_BUCKET_NAME',
+                '-e', 'GS_DEFAULT_ACL=$_GS_DEFAULT_ACL',
+                '-e', 'GS_STORAGE_PATH=$_GS_STORAGE_PATH',
+                '-e', 'TEST_STRIPE_API_KEY=$_TEST_STRIPE_API_KEY',
+                '-e', 'CORPAY_PARTNER_LEVEL_USER_ID=$_CORPAY_PARTNER_LEVEL_USER_ID',
+                '-e', 'CORPAY_JWT_AUDIENCE=$_CORPAY_JWT_AUDIENCE',
+                '-e', 'CORPAY_API_URL=$_CORPAY_API_URL',
+                '-e', 'HUBSPOT_TICKET_OWNER_ID=$_HUBSPOT_TICKET_OWNER_ID',
+                '-e', 'VERTO_API_BASE=$_VERTO_API_BASE',
+                '-e', 'VERTO_CLIENT_ID=$_VERTO_CLIENT_ID',
+                '-e', 'SLACK_NOTIFICATIONS_CHANNEL=testing-notifications-public',
+                '-e', 'RUN_DAJNGO_COLLECTSTATIC_AND_MIGRATE=0',
+                '-e', 'RUN_DAJNGO_TESTS=1',
+                '-e', 'NIUM_API_BASE=$_NIUM_API_BASE',
+                '-e', 'NIUM_CLIENT_ID=$_NIUM_CLIENT_ID',
+                '-e', 'DB_PASSWORD',
+                '-e', 'HUBSPOT_ACCESS_TOKEN',
+                '-e', 'SLACK_NOTIFICATIONS_APP_BOT_TOKEN',
+                '-e', 'CORPAY_PARTNER_LEVEL_SIGNATURE',
+                '-e', 'VERTO_API_KEY',
+                '-e', 'NIUM_API_KEY',
+                '--',
+                'bash',
+                '/app/entrypoint.sh',
+        ]
+        secretEnv: [
+            'DB_PASSWORD',
+            'HUBSPOT_ACCESS_TOKEN',
+            'SLACK_NOTIFICATIONS_APP_BOT_TOKEN',
+            'CORPAY_PARTNER_LEVEL_SIGNATURE',
+            'VERTO_API_KEY',
+            'NIUM_API_KEY'
+        ]
+
+    # dashboard:docker:migrate
+    -   id: 'dashboard:docker:migrate'
+        name: 'gcr.io/google-appengine/exec-wrapper'
+        waitFor: [ 'dashboard:docker:tests' ]
+        allowFailure: false
+        args: [ '-i', 'us-central1-docker.pkg.dev/$PROJECT_ID/pangea-docker-repository/$_APP_ENVIRONMENT-pangea-dashboard-api:$SHORT_SHA',
+                '-s', '$PROJECT_ID:$_DB_REGION:$_DB_INSTANCE',
+                '-e', 'PROJECT_ID=${PROJECT_ID}',
+                '-e', 'GCP_PROJECT_ID=${PROJECT_ID}',
+                '-e', 'DB_REGION=$_DB_REGION',
+                '-e', 'DB_INSTANCE=$_DB_INSTANCE',
+                '-e', 'ALLOWED_HOSTS=$_ALLOWED_HOSTS',
+                '-e', 'APP_ENVIRONMENT=$_APP_ENVIRONMENT',
+                '-e', 'DB_HOST=/cloudsql/$PROJECT_ID:$_DB_REGION:$_DB_INSTANCE',
+                '-e', 'DB_NAME=$_DB_NAME',
+                '-e', 'DB_PORT=$_DB_PORT',
+                '-e', 'DB_USER=$_DB_USER',
+                '-e', 'DEBUG=$_DEBUG',
+                '-e', 'DJANGO_SETTINGS_MODULE=$_DJANGO_SETTINGS_MODULE',
+                '-e', 'GS_BUCKET_NAME=$_GS_BUCKET_NAME',
+                '-e', 'GS_DEFAULT_ACL=$_GS_DEFAULT_ACL',
+                '-e', 'GS_STORAGE_PATH=$_GS_STORAGE_PATH',
+                '-e', 'TEST_STRIPE_API_KEY=$_TEST_STRIPE_API_KEY',
+                '-e', 'HUBSPOT_TICKET_OWNER_ID=$_HUBSPOT_TICKET_OWNER_ID',
+                '-e', 'RUN_DAJNGO_COLLECTSTATIC_AND_MIGRATE=1',
+                '-e', 'RUN_DAJNGO_TESTS=0',
+                '-e', 'VERTO_API_BASE=$_VERTO_API_BASE',
+                '-e', 'VERTO_CLIENT_ID=$_VERTO_CLIENT_ID',
+                '-e', 'NIUM_API_BASE=$_NIUM_API_BASE',
+                '-e', 'NIUM_CLIENT_ID=$_NIUM_CLIENT_ID',
+                '-e', 'VERTO_API_KEY',
+                '-e', 'DB_PASSWORD',
+                '-e', 'HUBSPOT_ACCESS_TOKEN',
+                '-e', 'NIUM_API_KEY',
+                '--',
+                'bash',
+                '/app/entrypoint.sh',
+        ]
+        secretEnv: [
+            'DB_PASSWORD',
+            'HUBSPOT_ACCESS_TOKEN',
+            'VERTO_API_KEY',
+            'NIUM_API_KEY'
+        ]
+
+    # Deploy to service instance
+    -   id: 'dashboard:vm:service:deploy'
+        name: 'gcr.io/cloud-builders/gcloud'
+        waitFor: [ 'dashboard:docker:migrate' ]
+        allowFailure: true
+        args:
+            - compute
+            - ssh
+            - --zone=${_VM_SERVICE_INSTANCE_ZONE}
+            - pangea@${_VM_SERVICE_INSTANCE}
+            - --command
+            - 'source /home/pangea/code/venv_hedgedesk_dashboard/bin/activate && cd /home/pangea/code/hedgedesk_dashboard && bash scripts/vm/update_code_and_services.sh'
+
+    # dashboard:gcloud:run:i
+    -   id: 'dashboard:gcloud:run:i'
+        name: 'gcr.io/cloud-builders/gcloud'
+        waitFor: [ 'dashboard:docker:migrate' ]
+        allowFailure: false
+        args: [
+            'run',
+            'deploy',
+            '$_APP_ENVIRONMENT-pangea-dashboard-i',
+            '--port=8000',
+            '--command=/app/entrypoint.sh',
+            '--vpc-connector=serverless-vpc-connector',
+            '--vpc-egress=all-traffic',
+            '--add-cloudsql-instances=$PROJECT_ID:$_DB_REGION:$_DB_INSTANCE',
+            '--verbosity=debug',
+            '--image=us-central1-docker.pkg.dev/$PROJECT_ID/pangea-docker-repository/$_APP_ENVIRONMENT-pangea-dashboard-api:$SHORT_SHA',
+            '--region=$_DB_REGION',
+            '--platform=managed',
+            '--execution-environment=gen2',
+            '--allow-unauthenticated',
+            '--min-instances=2',
+            '--service-account=$_API_SERVICE_ACCOUNT',
+            '--set-env-vars=DB_REGION=$_DB_REGION',
+            '--set-env-vars=DB_INSTANCE=$_DB_INSTANCE',
+            '--set-env-vars=RUN_THE_WEB_SERVER=1',
+            '--set-env-vars=NEW_RELIC_CONFIG_FILE=newrelic.ini',
+            '--set-env-vars=ALLOWED_HOSTS=$_ALLOWED_HOSTS',
+            '--set-env-vars=APP_ENVIRONMENT=$_APP_ENVIRONMENT',
+            '--set-env-vars=DB_HOST=$_DB_HOST',
+            '--set-env-vars=DB_NAME=$_DB_NAME',
+            '--set-env-vars=DB_PORT=$_DB_PORT',
+            '--set-env-vars=DB_USER=$_DB_USER',
+            '--set-env-vars=DEBUG=$_DEBUG',
+            '--set-env-vars=DJANGO_SETTINGS_MODULE=$_DJANGO_SETTINGS_MODULE',
+            '--set-env-vars=GS_BUCKET_NAME=$_GS_BUCKET_NAME',
+            '--set-env-vars=GS_DEFAULT_ACL=$_GS_DEFAULT_ACL',
+            '--set-env-vars=GS_STORAGE_PATH=$_GS_STORAGE_PATH',
+            '--set-env-vars=IB_GATEWAY_URL=$_IB_GATEWAY_URL',
+            '--set-env-vars=IB_GATEWAY_PORT=$_IB_GATEWAY_PORT',
+            '--set-env-vars=IB_GATEWAY_CLIENT_ID=$_IB_GATEWAY_CLIENT_ID',
+            '--set-env-vars=GS_BUCKET_MNT_NAME=$_GS_BUCKET_MNT_NAME',
+            '--set-env-vars=GS_BUCKET_MNT_DIR=$_GS_BUCKET_MNT_DIR',
+            '--set-env-vars=GPG_HOME_DIR=$_GPG_HOME_DIR',
+            '--set-env-vars=GPG_RECIPIENT=$_GPG_RECIPIENT',
+            '--set-env-vars=GPG_SIGNER=$_GPG_SIGNER',
+            '--set-env-vars=GPG_KEYS_GET_FROM_GS_BUCKET=$_GPG_KEYS_GET_FROM_GS_BUCKET',
+            '--set-env-vars=GPG_KEYS_GS_BUCKET_FULL_PATH=$_GPG_KEYS_GS_BUCKET_FULL_PATH',
+            '--set-env-vars=FRONTEND_URL=$_FRONTEND_URL',
+            '--set-env-vars=HUBSPOT_TICKET_OWNER_ID=$_HUBSPOT_TICKET_OWNER_ID',
+            '--set-env-vars=SLACK_NOTIFICATIONS_CHANNEL=$_SLACK_NOTIFICATIONS_CHANNEL',
+            '--set-env-vars=TWILIO_ACCOUNT_SID=$_TWILIO_ACCOUNT_SID',
+            '--set-env-vars=TWILIO_VERIFIED_FROM_NUMBER=$_TWILIO_VERIFIED_FROM_NUMBER',
+            '--set-env-vars=AF_ENABLED=$_AF_ENABLED',
+            '--set-env-vars=AF_LOCATION=$_AF_LOCATION',
+            '--set-env-vars=AF_COMPOSER_ENV_NAME=$_AF_COMPOSER_ENV_NAME',
+            '--set-env-vars=AF_WEBSERVER_URL=$_AF_WEBSERVER_URL',
+            '--set-env-vars=CORPAY_PARTNER_LEVEL_USER_ID=$_CORPAY_PARTNER_LEVEL_USER_ID',
+            '--set-env-vars=CORPAY_JWT_AUDIENCE=$_CORPAY_JWT_AUDIENCE',
+            '--set-env-vars=CORPAY_API_URL=$_CORPAY_API_URL',
+            '--set-env-vars=CORPAY_CLIENT_LEVEL_CODE=$_CORPAY_CLIENT_LEVEL_CODE',
+            '--set-env-vars=DASHBOARD_API_URL=$_DASHBOARD_API_URL',
+            '--set-env-vars=DASHBOARD_API_USER=$_DASHBOARD_API_USER',
+            '--set-env-vars=TWS_CLIENTID_RESERVATION_API_URL=$_TWS_CLIENTID_RESERVATION_API_URL',
+            '--set-env-vars=VICTOR_OPS_API_ID=$_VICTOR_OPS_API_ID',
+            '--set-env-vars=VICTOR_OPS_API_KEY=$_VICTOR_OPS_API_KEY',
+            '--set-env-vars=VICTOR_OPS_ENABLED=$_VICTOR_OPS_ENABLED',
+            '--set-env-vars=API_SCOPE=internal',
+            '--set-env-vars=REDIS_HOST=$_REDIS_HOST',
+            '--set-env-vars=REDIS_PORT=$_REDIS_PORT',
+            '--set-env-vars=VERTO_API_BASE=$_VERTO_API_BASE',
+            '--set-env-vars=VERTO_CLIENT_ID=$_VERTO_CLIENT_ID',
+            '--set-env-vars=NIUM_API_BASE=$_NIUM_API_BASE',
+            '--set-env-vars=NIUM_CLIENT_ID=$_NIUM_CLIENT_ID',
+            '--set-env-vars=MONEX_API_BASE=$_MONEX_API_BASE',
+            '--set-env-vars=MONEX_CLIENT_ID=$_MONEX_CLIENT_ID',
+
+            '--update-secrets=VERTO_API_KEY=secret-$_APP_ENVIRONMENT-pangea-io-VERTO_API_KEY:latest',
+            '--update-secrets=DB_PASSWORD=secret-$_APP_ENVIRONMENT-pangea-io-DB_PASSWORD:latest',
+            '--update-secrets=GPG_PASSPHRASE=secret-$_APP_ENVIRONMENT-pangea-io-GPG_PASSPHRASE:latest',
+            '--update-secrets=STRIPE_API_KEY=secret-$_APP_ENVIRONMENT-pangea-io-STRIPE_API_KEY:latest',
+            '--update-secrets=SENDGRID_API_KEY=secret-$_APP_ENVIRONMENT-pangea-io-SENDGRID_API_KEY:latest',
+            '--update-secrets=HUBSPOT_ACCESS_TOKEN=secret-$_APP_ENVIRONMENT-pangea-io-HUBSPOT_ACCESS_TOKEN:latest',
+            '--update-secrets=SLACK_NOTIFICATIONS_APP_BOT_TOKEN=secret-$_APP_ENVIRONMENT-pangea-io-SLACK_NOTIFICATIONS_APP_BOT_TOKEN:latest',
+            '--update-secrets=TWILIO_AUTH_TOKEN=secret-$_APP_ENVIRONMENT-pangea-io-TWILIO_AUTH_TOKEN:latest',
+            '--update-secrets=CORPAY_PARTNER_LEVEL_SIGNATURE=secret-$_APP_ENVIRONMENT-pangea-io-CORPAY_PARTNER_LEVEL_SIGNATURE:latest',
+            '--update-secrets=CORPAY_CLIENT_LEVEL_SIGNATURE=secret-$_APP_ENVIRONMENT-pangea-io-CORPAY_CLIENT_LEVEL_SIGNATURE:latest',
+            '--update-secrets=DASHBOARD_API_TOKEN=secret-$_APP_ENVIRONMENT-pangea-io-DASHBOARD_API_TOKEN:latest',
+            '--update-secrets=SLACK_SIGNING_SECRET=secret-$_APP_ENVIRONMENT-pangea-io-SLACK_SIGNING_SECRET:latest',
+            '--update-secrets=NIUM_API_KEY=secret-$_APP_ENVIRONMENT-pangea-io-NIUM_API_KEY:latest',
+            '--update-secrets=MONEX_DEV_USERNAME=secret-$_APP_ENVIRONMENT-pangea-io-MONEX_DEV_USERNAME:latest',
+            '--update-secrets=MONEX_DEV_PASSWORD=secret-$_APP_ENVIRONMENT-pangea-io-MONEX_DEV_PASSWORD:latest',
+            '--update-secrets=MONEX_API_KEY=secret-$_APP_ENVIRONMENT-pangea-io-MONEX_API_KEY:latest',
+        ]
+
+    # dashboard:gcloud:run:e
+    -   id: 'dashboard:gcloud:run:e'
+        name: 'gcr.io/cloud-builders/gcloud'
+        waitFor: [ 'dashboard:docker:migrate' ]
+        allowFailure: false
+        args: [
+            'run',
+            'deploy',
+            '$_APP_ENVIRONMENT-pangea-dashboard-e',
+            '--port=8000',
+            '--command=/app/entrypoint.sh',
+            '--vpc-connector=serverless-vpc-connector',
+            '--vpc-egress=all-traffic',
+            '--add-cloudsql-instances=$PROJECT_ID:$_DB_REGION:$_DB_INSTANCE',
+            '--verbosity=debug',
+            '--image=us-central1-docker.pkg.dev/$PROJECT_ID/pangea-docker-repository/$_APP_ENVIRONMENT-pangea-dashboard-api:$SHORT_SHA',
+            '--region=$_DB_REGION',
+            '--platform=managed',
+            '--execution-environment=gen2',
+            '--allow-unauthenticated',
+            '--min-instances=2',
+            '--service-account=$_API_SERVICE_ACCOUNT',
+            '--set-env-vars=DB_REGION=$_DB_REGION',
+            '--set-env-vars=DB_INSTANCE=$_DB_INSTANCE',
+            '--set-env-vars=RUN_THE_WEB_SERVER=1',
+            '--set-env-vars=NEW_RELIC_CONFIG_FILE=newrelic.ini',
+            '--set-env-vars=ALLOWED_HOSTS=$_ALLOWED_HOSTS',
+            '--set-env-vars=APP_ENVIRONMENT=$_APP_ENVIRONMENT',
+            '--set-env-vars=DB_HOST=$_DB_HOST',
+            '--set-env-vars=DB_NAME=$_DB_NAME',
+            '--set-env-vars=DB_PORT=$_DB_PORT',
+            '--set-env-vars=DB_USER=$_DB_USER',
+            '--set-env-vars=DEBUG=$_DEBUG',
+            '--set-env-vars=DJANGO_SETTINGS_MODULE=$_DJANGO_SETTINGS_MODULE',
+            '--set-env-vars=GS_BUCKET_NAME=$_GS_BUCKET_NAME',
+            '--set-env-vars=GS_DEFAULT_ACL=$_GS_DEFAULT_ACL',
+            '--set-env-vars=GS_STORAGE_PATH=$_GS_STORAGE_PATH',
+            '--set-env-vars=IB_GATEWAY_URL=$_IB_GATEWAY_URL',
+            '--set-env-vars=IB_GATEWAY_PORT=$_IB_GATEWAY_PORT',
+            '--set-env-vars=IB_GATEWAY_CLIENT_ID=$_IB_GATEWAY_CLIENT_ID',
+            '--set-env-vars=GS_BUCKET_MNT_NAME=$_GS_BUCKET_MNT_NAME',
+            '--set-env-vars=GS_BUCKET_MNT_DIR=$_GS_BUCKET_MNT_DIR',
+            '--set-env-vars=GPG_HOME_DIR=$_GPG_HOME_DIR',
+            '--set-env-vars=GPG_RECIPIENT=$_GPG_RECIPIENT',
+            '--set-env-vars=GPG_SIGNER=$_GPG_SIGNER',
+            '--set-env-vars=GPG_KEYS_GET_FROM_GS_BUCKET=$_GPG_KEYS_GET_FROM_GS_BUCKET',
+            '--set-env-vars=GPG_KEYS_GS_BUCKET_FULL_PATH=$_GPG_KEYS_GS_BUCKET_FULL_PATH',
+            '--set-env-vars=FRONTEND_URL=$_FRONTEND_URL',
+            '--set-env-vars=HUBSPOT_TICKET_OWNER_ID=$_HUBSPOT_TICKET_OWNER_ID',
+            '--set-env-vars=SLACK_NOTIFICATIONS_CHANNEL=$_SLACK_NOTIFICATIONS_CHANNEL',
+            '--set-env-vars=TWILIO_ACCOUNT_SID=$_TWILIO_ACCOUNT_SID',
+            '--set-env-vars=TWILIO_VERIFIED_FROM_NUMBER=$_TWILIO_VERIFIED_FROM_NUMBER',
+            '--set-env-vars=AF_ENABLED=$_AF_ENABLED',
+            '--set-env-vars=AF_LOCATION=$_AF_LOCATION',
+            '--set-env-vars=AF_COMPOSER_ENV_NAME=$_AF_COMPOSER_ENV_NAME',
+            '--set-env-vars=AF_WEBSERVER_URL=$_AF_WEBSERVER_URL',
+            '--set-env-vars=CORPAY_PARTNER_LEVEL_USER_ID=$_CORPAY_PARTNER_LEVEL_USER_ID',
+            '--set-env-vars=CORPAY_JWT_AUDIENCE=$_CORPAY_JWT_AUDIENCE',
+            '--set-env-vars=CORPAY_API_URL=$_CORPAY_API_URL',
+            '--set-env-vars=CORPAY_CLIENT_LEVEL_CODE=$_CORPAY_CLIENT_LEVEL_CODE',
+            '--set-env-vars=DASHBOARD_API_URL=$_DASHBOARD_API_URL',
+            '--set-env-vars=DASHBOARD_API_USER=$_DASHBOARD_API_USER',
+            '--set-env-vars=TWS_CLIENTID_RESERVATION_API_URL=$_TWS_CLIENTID_RESERVATION_API_URL',
+            '--set-env-vars=VICTOR_OPS_API_ID=$_VICTOR_OPS_API_ID',
+            '--set-env-vars=VICTOR_OPS_API_KEY=$_VICTOR_OPS_API_KEY',
+            '--set-env-vars=VICTOR_OPS_ENABLED=$_VICTOR_OPS_ENABLED',
+            '--set-env-vars=API_SCOPE=external',
+            '--set-env-vars=REDIS_HOST=$_REDIS_HOST',
+            '--set-env-vars=REDIS_PORT=$_REDIS_PORT',
+            '--set-env-vars=VERTO_API_BASE=$_VERTO_API_BASE',
+            '--set-env-vars=VERTO_CLIENT_ID=$_VERTO_CLIENT_ID',
+            '--set-env-vars=NIUM_API_BASE=$_NIUM_API_BASE',
+            '--set-env-vars=NIUM_CLIENT_ID=$_NIUM_CLIENT_ID',
+            '--set-env-vars=MONEX_API_BASE=$_MONEX_API_BASE',
+            '--set-env-vars=MONEX_CLIENT_ID=$_MONEX_CLIENT_ID',
+
+            '--update-secrets=VERTO_API_KEY=secret-$_APP_ENVIRONMENT-pangea-io-VERTO_API_KEY:latest',
+            '--update-secrets=DB_PASSWORD=secret-$_APP_ENVIRONMENT-pangea-io-DB_PASSWORD:latest',
+            '--update-secrets=GPG_PASSPHRASE=secret-$_APP_ENVIRONMENT-pangea-io-GPG_PASSPHRASE:latest',
+            '--update-secrets=STRIPE_API_KEY=secret-$_APP_ENVIRONMENT-pangea-io-STRIPE_API_KEY:latest',
+            '--update-secrets=SENDGRID_API_KEY=secret-$_APP_ENVIRONMENT-pangea-io-SENDGRID_API_KEY:latest',
+            '--update-secrets=HUBSPOT_ACCESS_TOKEN=secret-$_APP_ENVIRONMENT-pangea-io-HUBSPOT_ACCESS_TOKEN:latest',
+            '--update-secrets=SLACK_NOTIFICATIONS_APP_BOT_TOKEN=secret-$_APP_ENVIRONMENT-pangea-io-SLACK_NOTIFICATIONS_APP_BOT_TOKEN:latest',
+            '--update-secrets=TWILIO_AUTH_TOKEN=secret-$_APP_ENVIRONMENT-pangea-io-TWILIO_AUTH_TOKEN:latest',
+            '--update-secrets=CORPAY_PARTNER_LEVEL_SIGNATURE=secret-$_APP_ENVIRONMENT-pangea-io-CORPAY_PARTNER_LEVEL_SIGNATURE:latest',
+            '--update-secrets=CORPAY_CLIENT_LEVEL_SIGNATURE=secret-$_APP_ENVIRONMENT-pangea-io-CORPAY_CLIENT_LEVEL_SIGNATURE:latest',
+            '--update-secrets=DASHBOARD_API_TOKEN=secret-$_APP_ENVIRONMENT-pangea-io-DASHBOARD_API_TOKEN:latest',
+            '--update-secrets=SLACK_SIGNING_SECRET=secret-$_APP_ENVIRONMENT-pangea-io-SLACK_SIGNING_SECRET:latest',
+            '--update-secrets=NIUM_API_KEY=secret-$_APP_ENVIRONMENT-pangea-io-NIUM_API_KEY:latest',
+            '--update-secrets=MONEX_DEV_USERNAME=secret-$_APP_ENVIRONMENT-pangea-io-MONEX_DEV_USERNAME:latest',
+            '--update-secrets=MONEX_DEV_PASSWORD=secret-$_APP_ENVIRONMENT-pangea-io-MONEX_DEV_PASSWORD:latest',
+            '--update-secrets=MONEX_API_KEY=secret-$_APP_ENVIRONMENT-pangea-io-MONEX_API_KEY:latest',
+        ]
+
+    # dashboard:docker:tag:updated:base
+    -   id: 'dashboard:docker:tag:updated:base'
+        name: 'gcr.io/cloud-builders/docker'
+        waitFor: [
+            'dashboard:gcloud:run:i',
+            'dashboard:gcloud:run:e'
+        ]
+        allowFailure: false
+        args: [
+            'image',
+            'tag',
+            'us-central1-docker.pkg.dev/$PROJECT_ID/pangea-docker-repository/$_APP_ENVIRONMENT-pangea-dashboard-base:$SHORT_SHA',
+            'us-central1-docker.pkg.dev/$PROJECT_ID/pangea-docker-repository/$_APP_ENVIRONMENT-pangea-dashboard-base:$_APP_ENVIRONMENT',
+        ]
+
+    # dashboard:docker:tag:updated:api
+    -   id: 'dashboard:docker:tag:updated:api'
+        name: 'gcr.io/cloud-builders/docker'
+        waitFor: [
+            'dashboard:gcloud:run:i',
+            'dashboard:gcloud:run:e'
+        ]
+        allowFailure: false
+        args: [
+            'image',
+            'tag',
+            'us-central1-docker.pkg.dev/$PROJECT_ID/pangea-docker-repository/$_APP_ENVIRONMENT-pangea-dashboard-api:$SHORT_SHA',
+            'us-central1-docker.pkg.dev/$PROJECT_ID/pangea-docker-repository/$_APP_ENVIRONMENT-pangea-dashboard-api:$_APP_ENVIRONMENT',
+        ]
+
+    # dashboard:docker:push:updated:base
+    -   id: 'dashboard:docker:push:updated:base'
+        name: 'gcr.io/cloud-builders/docker'
+        waitFor: [ 'dashboard:docker:tag:updated:base' ]
+        allowFailure: false
+        args: [
+            'image',
+            'push',
+            'us-central1-docker.pkg.dev/$PROJECT_ID/pangea-docker-repository/$_APP_ENVIRONMENT-pangea-dashboard-base:$_APP_ENVIRONMENT',
+        ]
+
+    # dashboard:docker:push:updated:api
+    -   id: 'dashboard:docker:push:updated:api'
+        name: 'gcr.io/cloud-builders/docker'
+        waitFor: [ 'dashboard:docker:tag:updated:api' ]
+        allowFailure: false
+        args: [
+            'image',
+            'push',
+            'us-central1-docker.pkg.dev/$PROJECT_ID/pangea-docker-repository/$_APP_ENVIRONMENT-pangea-dashboard-api:$_APP_ENVIRONMENT',
+        ]
+
+images:
+    - 'us-central1-docker.pkg.dev/$PROJECT_ID/pangea-docker-repository/$_APP_ENVIRONMENT-pangea-dashboard-base:$SHORT_SHA'
+    - 'us-central1-docker.pkg.dev/$PROJECT_ID/pangea-docker-repository/$_APP_ENVIRONMENT-pangea-dashboard-base:$SHORT_SHA'
+    - 'us-central1-docker.pkg.dev/$PROJECT_ID/pangea-docker-repository/$_APP_ENVIRONMENT-pangea-dashboard-api:$_APP_ENVIRONMENT'
+    - 'us-central1-docker.pkg.dev/$PROJECT_ID/pangea-docker-repository/$_APP_ENVIRONMENT-pangea-dashboard-api:$_APP_ENVIRONMENT'
+options:
+    machineType: 'E2_HIGHCPU_32'
+    diskSizeGb: '200'
+    logging: CLOUD_LOGGING_ONLY
+
+availableSecrets:
+    secretManager:
+        -   versionName: 'projects/$PROJECT_ID/secrets/secret-$_APP_ENVIRONMENT-pangea-io-DB_PASSWORD/versions/latest'
+            env: 'DB_PASSWORD'
+        -   versionName: 'projects/$PROJECT_ID/secrets/secret-$_APP_ENVIRONMENT-pangea-io-HUBSPOT_ACCESS_TOKEN/versions/latest'
+            env: 'HUBSPOT_ACCESS_TOKEN'
+        -   versionName: 'projects/$PROJECT_ID/secrets/secret-$_APP_ENVIRONMENT-pangea-io-SLACK_NOTIFICATIONS_APP_BOT_TOKEN/versions/latest'
+            env: 'SLACK_NOTIFICATIONS_APP_BOT_TOKEN'
+        -   versionName: 'projects/$PROJECT_ID/secrets/secret-$_APP_ENVIRONMENT-pangea-io-CORPAY_PARTNER_LEVEL_SIGNATURE/versions/latest'
+            env: 'CORPAY_PARTNER_LEVEL_SIGNATURE'
+        -   versionName: 'projects/$PROJECT_ID/secrets/secret-$_APP_ENVIRONMENT-pangea-io-VERTO_API_KEY/versions/latest'
+            env: 'VERTO_API_KEY'
+        -   versionName: 'projects/$PROJECT_ID/secrets/secret-$_APP_ENVIRONMENT-pangea-io-NIUM_API_KEY/versions/latest'
+            env: 'NIUM_API_KEY'

@@ -1,0 +1,9 @@
+-r base.txt
+
+gunicorn==22.0.0
+sentry-sdk==2.8.0
+newrelic==7.10.0.175
+django-pymemcache==1.0.0
+protobuf==3.20.2
+flower==2.0.1
+xlsxwriter==3.2.0

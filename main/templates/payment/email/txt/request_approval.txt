@@ -1,0 +1,18 @@
+Authorization Needed
+A transaction has been created that requires your approval.
+Cutoff time: {{ cutoff_date }}
+
+Review Transaction: {{ payment_link }}
+
+Execution Strategy: {{ execution_strategy }}
+Currency: {{ currency }}
+Buy Amount: {{ buy_amount }}
+Value Date: {{ value_date }}
+Beneficiary: {{ beneficiary }}
+Creator: {{ creator }}
+Approver(s): {{ approvers }}
+
+Authorization Instructions
+Review this hedge on Pangea. If transaction is approved, please select "Confirm & Finish" to authorize and execute.
+
+Review Transaction: {{ payment_link }}

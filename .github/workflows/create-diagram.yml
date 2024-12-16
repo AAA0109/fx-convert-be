@@ -1,0 +1,23 @@
+name: Create Diagram
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - master
+      - deploy/development
+      - deploy/staging
+      - deploy/production
+
+jobs:
+  create-diagram:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+      - name: Update diagram
+        uses: githubocto/repo-visualizer@main
+        with:
+          excluded_paths: "ignore,.github"
+          output: "diagram.svg"

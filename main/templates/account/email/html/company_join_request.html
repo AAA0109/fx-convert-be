@@ -1,0 +1,9 @@
+{% extends "core/email/layout/base.html" %}
+{% block content %}
+  <p>{{ requester.get_full_name }} would like to join your company on Pangea Prime</p>
+  <a class="btn" href="{{ approve_url }}" style="color:white; text-decoration: none; text-transform: uppercase;">Approve</a>
+  <a class="btn" href="{{ reject_url }}" style="color:white; text-decoration: none; text-transform: uppercase;">Reject</a>
+  <p class="lightgrey">Thanks,<br/>
+  Pangea
+  </p>
+{% endblock %}

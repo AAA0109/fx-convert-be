@@ -1,0 +1,24 @@
+[
+  {
+    "model": "account.account",
+    "pk": 1,
+    "fields": {
+      "name": "Main Account",
+      "company": 1,
+      "created": "2022-01-01",
+      "is_active": true,
+      "type": 1
+    }
+  },
+  {
+    "model": "account.account",
+    "pk": 2,
+    "fields": {
+      "name": "GBP Only Account",
+      "company": 1,
+      "created": "2022-01-01",
+      "is_active": true,
+      "type": 1
+    }
+  }
+]

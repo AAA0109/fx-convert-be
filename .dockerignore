@@ -1,0 +1,128 @@
+# Python and Django
+*.py[cod]
+*$py.class
+*.log
+*.pot
+*.pyc
+__pycache__
+db.sqlite3
+*.egg-info/
+.installed.cfg
+*.egg
+*.manifest
+*.spec
+
+# Django static and media files
+main/static/*
+!main/static/.gitkeep
+main/apps/dataprovider/storage/*
+!main/apps/dataprovider/storage/**/.gitkeep
+
+# Local development files
+*LOCAL.py
+*LOCAL.toml
+*LOCAL.txt
+*LOCAL.sql
+
+
+# Backup files
+*.bak
+
+# IDE and Editor files
+## PyCharm
+.idea/
+*.iws
+/out/
+
+## Sublime Text
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.sublime-workspace
+*.sublime-project
+
+## Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.env.sample
+*.env*
+.envs/
+
+# Celery
+celerybeat-schedule.*
+
+# Other tools and configs
+.python-version  # pyenv
+.mypy_cache/
+/site  # mkdocs documentation
+sftp-config.json
+
+# Package control specific files
+Control.last-run
+Control.ca-list
+Control.ca-bundle
+Control.system-ca-bundle
+GitHub.sublime-settings
+
+# Docker and deployment related
+dockerfiles/
+.editorconfig
+cloudbuild.yaml
+docker-compose.yml
+*.MD
+*.md
+.github/
+.nvmrc
+gke/
+.gitattributes
+.gitlab-ci.yml
+.pre-commit-config.yaml
+.readthedocs.yml
+.travis.yml
+.git
+
+# Data directories
+postgres/data

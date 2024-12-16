@@ -1,0 +1,147 @@
+volumes:
+  pangea_prime_local_postgres_data: {}
+  pangea_prime_local_postgres_data_backups: {}
+  pangea_prime_local_redis_data: {}
+  pangea_prime_local_redis_data_worker: {}
+
+services:
+  api: &api
+    build:
+      context: .
+      dockerfile: ./compose/local/api/Dockerfile
+    image: pangea_prime_local_api
+    container_name: pangea_prime_local_api
+    depends_on:
+      - postgres
+      - redis
+      - redis_worker
+      - mailpit
+    env_file:
+      - ./.envs/.local/.api
+      - ./.envs/.local/.postgres
+    command: /start
+    ports:
+      - "8000:8000"
+    volumes:
+      - ~/.config/gcloud:/root/.config/gcloud
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/production/postgres/Dockerfile
+    image: pangea_prime_production_postgres
+    container_name: pangea_prime_local_postgres
+    volumes:
+      - pangea_prime_local_postgres_data:/var/lib/postgresql/data
+      - pangea_prime_local_postgres_data_backups:/backups
+    env_file:
+      - ./.envs/.local/.postgres
+    ports:
+      - "5432:5432"
+
+  mailpit:
+    image: docker.io/axllent/mailpit:latest
+    container_name: pangea_prime_local_mailpit
+    ports:
+      - "8025:8025"
+
+  redis:
+    image: docker.io/redis:6
+    container_name: pangea_prime_local_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - pangea_prime_local_redis_data:/data
+
+  redis_worker:
+    image: docker.io/redis:6
+    container_name: pangea_prime_local_redis_data_worker
+    ports:
+      - "6380:6380"
+    volumes:
+      - pangea_prime_local_redis_data_worker:/data
+
+  ide:
+    <<: *api
+    image: pangea_prime_local_ide
+    container_name: pangea_prime_local_ide
+    depends_on:
+      - redis
+      - redis_worker
+      - postgres
+      - mailpit
+    ports: []
+    command: /start-ide
+
+  celeryworker:
+    <<: *api
+    image: pangea_prime_local_celeryworker
+    container_name: pangea_prime_local_celeryworker
+    depends_on:
+      - redis
+      - redis_worker
+      - postgres
+      - mailpit
+    ports: []
+    command: /start-celeryworker
+  # commenting this out until this is fixed: https://youtrack.jetbrains.com/issue/PY-73331/Cant-set-Docker-Compose-profiles-on-Run-Debug-configurations
+  #    celerybeat:
+  #        <<: *api
+  #        image: pangea_prime_local_celerybeat
+  #        container_name: pangea_prime_local_celerybeat
+  #        depends_on:
+  #            - redis
+  #            - postgres
+  #            - mailpit
+  #        ports: [ ]
+  #        command: /start-celerybeat
+
+  flower:
+    <<: *api
+    image: pangea_prime_local_flower
+    container_name: pangea_prime_local_flower
+    ports:
+      - "5555:5555"
+    command: /start-flower
+
+  omspayment:
+    <<: *api
+    image: pangea_prime_local_omspayment
+    container_name: pangea_prime_local_omspayment
+    depends_on:
+      - redis
+      - postgres
+      - mailpit
+    ports: []
+    command: /start-omspayment
+
+  emscorpay:
+    <<: *api
+    image: pangea_prime_local_emscorpay
+    container_name: pangea_prime_local_emscorpay
+    depends_on:
+      - redis
+      - postgres
+      - mailpit
+    ports: []
+    command: /start-emscorpay
+
+  emsrfq:
+    <<: *api
+    image: pangea_prime_local_emsrfq
+    container_name: pangea_prime_local_emsrfq
+    depends_on:
+      - redis
+      - postgres
+      - mailpit
+    ports: []
+    command: /start-emsrfq
+  rfqcollector:
+    <<: *api
+    image: pangea_prime_local_rfqcollector
+    container_name: pangea_prime_rfqcollector
+    depends_on:
+      - redis
+      - postgres
+    ports: []
+    command: /start-rfqcollector

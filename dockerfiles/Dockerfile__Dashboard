@@ -1,0 +1,38 @@
+FROM pangea__api__base AS base
+
+FROM base
+
+############################
+# Setup environmental variables
+############################
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1
+
+############################
+# Setup user and app
+############################
+RUN useradd -U app_user \
+    && install -d -m 0755 -o app_user -g app_user /app
+#USER app_user:app_user throws permissions error
+WORKDIR /app
+
+
+#############################
+## Copy code files
+#############################
+# TODO: Remove unused folders from the docker-image
+COPY --chown=app_user:app_user . .
+
+
+############################
+# Setup runtime configurations and checks
+############################
+
+
+############################
+# Setup entrypoint
+############################
+RUN chmod +x /app/entrypoint.sh
+ENTRYPOINT ["/usr/bin/tini", "--"]
+
+CMD ["python", "-c", "print('Dockerfile__Dashboard says: what should I do?')"]

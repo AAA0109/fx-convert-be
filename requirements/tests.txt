@@ -1,0 +1,9 @@
+-r base.txt
+black==24.3.0
+coverage==6.0.2
+factory-boy==3.2.0
+flake8==4.0.1
+isort==5.9.3
+tox==3.24.4
+mock==5.1.0
+

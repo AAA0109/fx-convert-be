@@ -1,0 +1,20 @@
+-
+  service_class: main.apps.oems.backend.oms.OmsBase
+  id: TEST_PAYMENT_OMS1
+  type: CORPAY
+-
+  service_class: main.apps.oems.backend.corpay_ems.CorpayEms
+  id: TEST_CORPAY1
+  type: CORPAY
+-
+  service_class: main.apps.oems.backend.corpay_mp_ems.CorpayMpEms
+  id: TEST_CORPAY_MP1
+  type: CORPAY_MP
+-
+  service_class: main.apps.oems.backend.rfq_ems.RfqEms
+  id: TEST_RFQ1
+  type: RFQ
+-
+  service_class: main.apps.oems.backend.rfq_mp_ems.RfqMpEms
+  id: TEST_MP_RFQ1
+  type: RFQ_MP

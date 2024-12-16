@@ -1,0 +1,8 @@
+{% extends "core/email/layout/base.html" %}
+{% block content %}
+  <p><b>{{ inviter_name }}</b> has invited you to join their organization on <b>Pangea</b>.</p>
+  <a class="btn" href="{{ url }}" style="color:white; text-decoration: none; text-transform: uppercase;">Accept the invite</a>
+  <p class="lightgrey">Thanks,<br/>
+  Pangea
+  </p>
+{%  endblock %}

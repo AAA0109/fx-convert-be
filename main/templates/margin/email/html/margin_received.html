@@ -1,0 +1,38 @@
+{% extends "core/email/layout/base.html" %}
+{% load static %}
+{% block content %}
+  <table class="full-width">
+    <tr>
+      <td class="center">
+        <p><img src="{% static 'media/email/status/success.png' %}"/></p>
+        <h3 class="uppercase">Margin Received</h3>
+      </td>
+    </tr>
+    <tr>
+      <td><p class="padded">This is confirmation we have received the following margin deposit:</p></td>
+    </tr>
+  </table>
+  <table class="full-width table striped">
+    <tr>
+      <td>Amount:</td>
+      <td>{{ deposit_amount }}</td>
+    </tr>
+    <tr>
+      <td>Received:</td>
+      <td>{{ date_received|date:"F d, Y 'at' P" }}</td>
+    </tr>
+    {% if from %}
+      <tr>
+        <td>From:</td>
+        <td>{{ from }}</td>
+      </tr>
+    {% endif %}
+    <tr>
+      <td>Method:</td>
+      <td>{{ method }}</td>
+    </tr>
+  </table>
+  <p>
+    <a class="btn bold" href="{{ url }}" style="color:white; text-decoration: none; text-transform: uppercase;">Go to margin page &rarr;</a>
+  </p>
+{% endblock %}

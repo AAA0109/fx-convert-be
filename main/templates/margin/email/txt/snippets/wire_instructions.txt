@@ -1,0 +1,26 @@
+Wire Transfer Instruction
+Call your bank or use an online portal to initiate a wire transfer. You will need your banking information and the following details:
+
+Bank Name:
+{{ bank_name }}
+
+Bank Address:
+{{ bank_address }}
+
+Beneficiary Name:
+{{ beneficiary_name }}
+
+Beneficiary Address:
+{{ beneficiary_address|linebreaksbr }}
+
+Beneficiary Account Number:
+{{ beneficiary_account_number }}
+
+Beneficiary Routing Number:
+{{ beneficiary_routing_number }}
+
+SWIFT/BIC Code:
+{{ swift_bic_code }}
+
+Reference:
+{{ wire_reference }}

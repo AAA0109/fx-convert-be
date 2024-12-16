@@ -1,0 +1,15 @@
+Urgent: Positions Liquidating
+To protect you from total liquidation, we have liquidated some of your positions. Deposit margin immediately or reduce hedge settings.
+
+Margin Account Total:
+{{ margin_total }}
+
+Recommended Deposit:
+{{ recommended_deposit }}
+
+Margin Health Score:
+{{ margin_health_score }}/100
+
+{% include "margin/email/txt/snippets/wire_instructions.txt"%}
+
+Goto Margin Page: ({{ url }})

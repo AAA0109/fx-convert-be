@@ -1,0 +1,35 @@
+{% extends "core/email/layout/base.html" %}
+{% load static %}
+{% block content %}
+  <table class="full-width">
+    <tr>
+      <td class="center">
+        <p><img src="{% static 'media/email/status/error.png' %}"/></p>
+        <h3 class="uppercase">Urgent: Positions Liquidating</h3>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p class="padded">To protect you from total liquidation, we have liquidated some of your positions. Deposit margin immediately or reduce hedge settings.</p>
+      </td>
+    </tr>
+  </table>
+  <table class="full-width table striped">
+    <tr>
+      <td>Margin Account Total:</td>
+      <td>{{ margin_total }}</td>
+    </tr>
+    <tr>
+      <td>Recommended Deposit:</td>
+      <td>{{ recommended_deposit }}</td>
+    </tr>
+    <tr>
+      <td>Margin Health Score:</td>
+      <td>{{ margin_health_score }}/100</td>
+    </tr>
+  </table>
+  {% include "margin/email/html/snippets/wire_instructions.html"%}
+  <p>
+    <a class="btn bold" href="{{ url }}" style="color:white; text-decoration: none; text-transform: uppercase;">Go to margin page &rarr;</a>
+  </p>
+{% endblock %}

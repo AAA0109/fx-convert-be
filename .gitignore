@@ -1,0 +1,204 @@
+# Django #
+*.log
+*.pot
+*.pyc
+__pycache__
+db.sqlite3
+flower_db*
+main/static/*
+!main/static/media/
+main/static/media/*
+!main/static/media/email/
+!main/static/.gitkeep
+main/apps/dataprovider/storage/*
+!main/apps/dataprovider/storage/**/.gitkeep
+
+# Local Dev (for creatining scripts etc. locally that dont get tracked)
+*LOCAL.py
+*LOCAL.toml
+*LOCAL.txt
+*LOCAL.sql
+
+
+# OSX
+.DS_Store
+
+# Backup files #
+*.bak
+
+# If you are using PyCharm #
+.idea/*
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/dictionaries
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.xml
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/**/gradle.xml
+.idea/**/libraries
+*.iws /out/
+
+# Python #
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.Python build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# celery
+celerybeat-schedule.*
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.env.local
+.env.dev
+.env.staging
+.env.prod
+.env.demo
+.env.test
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.envs/*
+!gke/env/
+gke/env/.dev.env
+gke/env/.staging.env
+gke/env/.prod.env
+!gke/json/
+gke/json/*.json
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+
+# Sublime Text #
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.sublime-workspace
+*.sublime-project
+
+# sftp configuration file
+sftp-config.json
+
+# Package control specific files Package
+Control.last-run
+Control.ca-list
+Control.ca-bundle
+Control.system-ca-bundle
+GitHub.sublime-settings
+
+# Visual Studio Code #
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history
+
+# Media Folder
+media/*
+!media/.gitkeep
+
+# Storage Folder
+storage_test/*
+storage/*
+!storage/.gitkeep
+!storage/gcp/
+storage/gcp/*
+!storage/gcp/.gitkeep
+!storage/csv/
+storage/csv/*
+!storage/csv/.gitkeep
+!storage/xlsx/
+storage/xlsx/*
+!storage/xlsx/.gitkeep
+!storage/json/
+storage/json/*
+!storage/json/.gitkeep
+!storage/dam/
+storage/dam/*
+!storage/dam/.gitkeep
+!storage/dam/applications/
+storage/dam/applications/*
+!storage/dam/applications/.gitkeep
+!storage/dam/applications/xml
+storage/dam/applications/xml/*
+!storage/dam/applications/xml/.gitkeep
+!storage/dam/applications/xml/request
+storage/dam/applications/xml/request/*
+!storage/dam/applications/xml/request/.gitkeep
+!storage/dam/applications/xml/response
+storage/dam/applications/xml/response/*
+!storage/dam/applications/xml/response/.gitkeep
+!storage/dam/applications/json
+storage/dam/applications/json/*
+!storage/dam/applications/json/.gitkeep
+!storage/dam/applications/json/request
+storage/dam/applications/json/request/*
+!storage/dam/applications/json/request/.gitkeep
+!storage/dam/applications/json/response
+storage/dam/applications/json/response/*
+!storage/dam/applications/json/response/.gitkeep
+!storage/dam/applications/zip
+storage/dam/applications/zip/*
+!storage/dam/applications/zip/.gitkeep
+!storage/dam/applications/zip/request
+storage/dam/applications/zip/request/*
+!storage/dam/applications/zip/request/.gitkeep
+
+# Don't ignore
+!/gateways/ibkr/clientportal/**/
+
+# Docker
+./postgres/data

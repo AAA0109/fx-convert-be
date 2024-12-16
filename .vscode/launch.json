@@ -1,0 +1,152 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Pangea Prime: Django Server",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/manage.py",
+      "args": ["runserver"],
+      "django": true,
+      "justMyCode": true
+    },
+    {
+      "name": "Pangea Prime: Celery Worker",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "celery",
+      "args": ["-A", "main", "worker", "--loglevel=info", "-c", "8"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Pangea Prime: Flower",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "celery",
+      "args": ["-A", "main", "flower", "--port=5555"],
+      "console": "integratedTerminal",
+      "justMyCode": false,
+      "env": {
+        "FLOWER_UNAUTHENTICATED_API": "true"
+      }
+    },
+    {
+      "name": "Pangea Prime: OMS",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/manage.py",
+      "args": ["runoms", "--oms-id", "TEST_PAYMENT_OMS1", "--timeout", "1.0"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Pangea Prime: EMS",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/manage.py",
+      "args": ["runems", "--ems-id", "TEST_CORPAY1", "--timeout", "1.0"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    { 
+      "name": "Pangea Prime: Migrate",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/manage.py",
+      "args": ["migrate"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    { 
+      "name": "Pangea Prime: Import Market Data",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/manage.py",
+      "args": ["importmarketdata", "--profile_id=${input:profileId}"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Pangea Prime: Sync Bene from Brokers (All Companies)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/manage.py",
+      "args": ["sync_bene_from_brokers"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Pangea Prime: Sync Bene from Brokers (Specific Company)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/manage.py",
+      "args": ["sync_bene_from_brokers", "--company-id=${input:companyId}"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Pangea Prime: Sync Wallet from Brokers (All Companies)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/manage.py",
+      "args": ["sync_wallet_from_brokers"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Pangea Prime: Sync Wallet from Brokers (Specific Company)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/manage.py",
+      "args": ["sync_wallet_from_brokers", "--company-id=${input:companyId}"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Pangea Prime: Sync Trades from Monex (All Company)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/manage.py",
+      "args": [
+        "manual_sync",
+        "--all-companies",
+        "--monex",
+        "--fwd-sync",
+        "--spot-sync"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Pangea Prime: Sync Trades From Monex (Specific Company)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/manage.py",
+      "args": [
+        "manual_sync",
+        "--company-id=${input:companyId}",
+        "--monex",
+        "--fwd-sync",
+        "--spot-sync"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    }
+  ],
+  "inputs": [
+    {
+      "id": "profileId",
+      "type": "promptString",
+      "description": "Enter the company ID for syncing beneficiaries"
+    },
+    {
+      "id": "companyId",
+      "type": "promptString",
+      "description": "Enter the company ID for syncing beneficiaries"
+    }
+  ]
+}

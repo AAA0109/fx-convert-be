@@ -1,0 +1,2 @@
+from main.apps.reports.tasks.platform_activity_report import task_to_generate_platform_activity_report
+
